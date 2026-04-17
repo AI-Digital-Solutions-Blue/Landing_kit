@@ -2,32 +2,159 @@
   width: 100%;
   max-width: min(1820px, 100%);
   margin-inline: auto;
-  margin-top: clamp(28px, 5vw, 56px);
-  padding-top: clamp(20px, 3.5vw, 40px);
   box-sizing: border-box;
 }
 
-.patrocinios__title {
-  margin: 0 auto clamp(20px, 3.2vw, 36px);
-  max-width: min(1520px, 100%);
-  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  text-align: center;
-  color: #1a1a1a;
-}
-
-.patrocinios__frame {
+.patrocinios__inner {
   width: 100%;
-  line-height: 0;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: 0;
+  box-sizing: border-box;
 }
 
-.patrocinios__img {
-  display: block;
+.patrocinios__viewport {
+  width: 100%;
+  overflow: hidden;
+  /* Bandas laterales muy estrechas */
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 1.5%,
+    #000 98.5%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 1.5%,
+    #000 98.5%,
+    transparent 100%
+  );
+}
+
+.patrocinios__track {
+  display: flex;
+  width: max-content;
+  animation: patrocinios-marquee 45s linear infinite;
+  will-change: transform;
+}
+
+.patrocinios__group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: stretch;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.patrocinios__item {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: clamp(118px, 13vw, 148px);
+  min-width: min(340px, 90vw);
+  max-width: 420px;
+  border-right: 1px solid rgba(0, 0, 0, 0.28);
+  padding: clamp(14px, 2.2vw, 22px) clamp(26px, 4.5vw, 48px);
+}
+
+.patrocinios__card {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: clamp(8px, 1.4vw, 12px);
+  text-align: center;
+}
+
+.patrocinios__caption {
+  margin: 0;
   width: 100%;
   max-width: 100%;
-  height: auto;
-  margin-inline: auto;
+  font-size: clamp(0.68rem, 1.2vw, 0.78rem);
+  font-weight: 300;
+  line-height: 1.38;
+  letter-spacing: 0.01em;
+  color: #5c6d7e;
+  white-space: pre-line;
+}
+
+.patrocinios__logo-img {
+  display: block;
+  max-height: clamp(44px, 5.5vw, 54px);
+  width: auto;
+  max-width: min(220px, 78%);
   object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.95;
+  transition:
+    opacity 0.2s ease,
+    filter 0.2s ease;
+}
+
+/* Escudos deportivos: más presencia que tipografías (Capital / La Razón) */
+.patrocinios__logo-img--large {
+  max-height: clamp(58px, 7vw, 72px);
+  max-width: min(280px, 90%);
+}
+
+.patrocinios__logo-img:hover {
+  opacity: 1;
+  filter: grayscale(0.35);
+}
+
+.patrocinios__logo-placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #f1f5f9 0%, #e2e8f0 100%);
+  border: 1px dashed rgba(148, 163, 184, 0.65);
+  box-sizing: border-box;
+}
+
+.patrocinios__logo-placeholder-inner {
+  font-size: clamp(0.72rem, 1.4vw, 0.8rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+@keyframes patrocinios-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .patrocinios__track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .patrocinios__group--duplicate {
+    display: none;
+  }
+
+  .patrocinios__viewport {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
 }

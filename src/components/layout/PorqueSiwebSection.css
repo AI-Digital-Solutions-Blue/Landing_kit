@@ -1,0 +1,201 @@
+.porque-siweb {
+  --pq-accent: #2d9cdb;
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-left: 0;
+  padding-right: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.porque-siweb::before {
+  content: '';
+  position: absolute;
+  inset: -8% -4% auto -4%;
+  height: 120%;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 90% 20%, rgba(45, 156, 219, 0.07), transparent 55%),
+    repeating-linear-gradient(
+      -12deg,
+      transparent 0,
+      transparent 11px,
+      rgba(45, 156, 219, 0.06) 11px,
+      rgba(45, 156, 219, 0.06) 12px
+    );
+  pointer-events: none;
+}
+
+.porque-siweb__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.porque-siweb__card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: stretch;
+  min-height: min(360px, 52vw);
+  background: #fff;
+  border-radius: clamp(14px, 2vw, 18px);
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.1);
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .porque-siweb__card {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+}
+
+.porque-siweb__media {
+  position: relative;
+  min-height: clamp(220px, 38vw, 340px);
+  overflow: hidden;
+  background: #1e3a5f;
+}
+
+@media (max-width: 900px) {
+  .porque-siweb__media {
+    order: -1;
+    min-height: clamp(200px, 42vw, 280px);
+  }
+}
+
+.porque-siweb__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Velo azul tipo mock */
+.porque-siweb__media::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    135deg,
+    rgba(30, 100, 160, 0.55) 0%,
+    rgba(45, 156, 219, 0.42) 45%,
+    rgba(45, 156, 219, 0.28) 100%
+  );
+  pointer-events: none;
+}
+
+/* Fundido hacia la columna blanca */
+.porque-siweb__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(90deg, transparent 0%, transparent 38%, rgba(255, 255, 255, 0.35) 62%, #fff 88%);
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .porque-siweb__media::after {
+    background: linear-gradient(180deg, transparent 0%, transparent 35%, rgba(255, 255, 255, 0.4) 65%, #fff 92%);
+  }
+}
+
+.porque-siweb__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(20px, 3vw, 28px);
+  padding: clamp(28px, 4vw, 44px) clamp(24px, 4vw, 40px) clamp(28px, 4vw, 44px) clamp(20px, 3vw, 32px);
+  text-align: left;
+  background: #fff;
+}
+
+@media (max-width: 900px) {
+  .porque-siweb__content {
+    padding: clamp(24px, 4vw, 36px) clamp(20px, 3vw, 28px);
+  }
+}
+
+.porque-siweb__title {
+  margin: 0;
+  max-width: 100%;
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  text-align: left;
+  background-image: linear-gradient(
+    90deg,
+    #000000 0%,
+    #0a0a0a 14%,
+    #1a4f7a 40%,
+    var(--pq-accent) 62%,
+    #3498db 82%,
+    #5dade2 100%
+  );
+  background-size: 100% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.porque-siweb__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 2.5vw, 24px);
+}
+
+.porque-siweb__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.porque-siweb__item-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin-top: 2px;
+  line-height: 0;
+}
+
+.porque-siweb__tick {
+  display: block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.porque-siweb__item-body {
+  min-width: 0;
+}
+
+.porque-siweb__item-title {
+  margin: 0 0 clamp(6px, 1vw, 8px);
+  font-size: clamp(1.02rem, 1.9vw, 1.12rem);
+  font-weight: 700;
+  line-height: 1.3;
+  color: #0a0a0a;
+}
+
+.porque-siweb__item-text {
+  margin: 0;
+  font-size: clamp(0.9rem, 1.65vw, 0.98rem);
+  font-weight: 300;
+  line-height: 1.55;
+  color: #4b5563;
+}
+
+.porque-siweb__item-text strong {
+  font-weight: 700;
+  color: #1a1a1a;
+}

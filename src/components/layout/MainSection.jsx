@@ -1,6 +1,14 @@
 import './MainSection.css'
 
 const heroImageSrc = `/imagenes/${encodeURIComponent('PC 1 1.png')}`
+const listIconSrc = `/svg/${encodeURIComponent('iconLis.svg')}`
+
+const heroBullets = [
+  'Sin coste para ti',
+  'Sin IVA (empresa canaria)',
+  'Verifactu incluido',
+  'Portátil de regalo',
+]
 
 export function MainSection() {
   return (
@@ -9,30 +17,31 @@ export function MainSection() {
           <section className="hero__content">
             <div className="hero__content-box">
               <p className="hero__badge">
-                <span className="hero__badge-accent" aria-hidden="true">
+                <span className="hero__badge-inner">
                   <svg
                     className="hero__badge-icon"
-                    width="24"
-                    height="24"
+                    width="26"
+                    height="26"
                     viewBox="0 0 24 24"
                     focusable="false"
+                    aria-hidden="true"
                   >
                     <path
                       fill="currentColor"
                       d="M4 6a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm2 0v8h12V6H6zm-2 10h16a1 1 0 010 2H4a1 1 0 010-2z"
                     />
                   </svg>
+                  <span className="hero__badge-text">Kit Digital · Bonos Vigentes 2025</span>
                 </span>
-                <span className="hero__badge-label">Kit Digital · Bonos Vigentes 2025</span>
               </p>
 
               <div className="hero__headlines">
                 <h1 id="hero-heading" className="hero__title">
                   <span className="hero__title-line">
-                    Consume <span className="hero__accent">tu bono.</span>
+                    Consume <span className="hero__accent">tu bono</span>
                   </span>
                   <span className="hero__title-line">
-                    Te cuesta <span className="hero__accent">0 €.</span>
+                    Te cuesta <span className="hero__accent">0 €</span>
                   </span>
                 </h1>
                 <h2 id="hero-subheading" className="hero__subtitle">
@@ -58,10 +67,22 @@ export function MainSection() {
               </div>
 
               <ul className="hero__list">
-                <li>Sin coste para ti</li>
-                <li>Sin IVA (empresa canaria)</li>
-                <li>Verifactu incluido</li>
-                <li>Portátil de regalo</li>
+                {heroBullets.map((line) => (
+                  <li key={line} className="hero__list-item">
+                    <span className="hero__list-icon-wrap" aria-hidden="true">
+                      <img
+                        className="hero__list-icon"
+                        src={listIconSrc}
+                        alt=""
+                        width={27}
+                        height={27}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </span>
+                    <span className="hero__list-text">{line}</span>
+                  </li>
+                ))}
               </ul>
             </div>
           </section>

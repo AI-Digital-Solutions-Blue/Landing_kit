@@ -1,6 +1,7 @@
 import './EligeEquipoSection.css'
 
 const imageSrc = `/imagenes/${encodeURIComponent('lapcolour.png')}`
+const listIconSrc = `/svg/${encodeURIComponent('iconLis.svg')}`
 
 const equipos = [
   'Ryzen 5, 16GB de RAM, 512GB SSD',
@@ -8,23 +9,6 @@ const equipos = [
   'Lenovo M75q + pantalla 23.8”',
   'Apple MacBook NEO',
 ]
-
-function ListIcon() {
-  return (
-    <svg className="elige-equipo__bullet-icon" width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
-      <circle cx="11" cy="11" r="10" fill="rgba(45, 156, 219, 0.14)" stroke="#2d9cdb" strokeWidth="1.2" />
-      <circle cx="11" cy="11" r="4.5" stroke="#2d9cdb" strokeWidth="0.9" fill="none" opacity="0.85" />
-      <path d="M11 1.5v19M2 11h18" stroke="#2d9cdb" strokeWidth="0.85" strokeLinecap="round" opacity="0.65" />
-      <path
-        d="M4.5 6.5c3 1.2 10 1.2 13 0M4.5 15.5c3-1.2 10-1.2 13 0"
-        stroke="#2d9cdb"
-        strokeWidth="0.75"
-        fill="none"
-        opacity="0.55"
-      />
-    </svg>
-  )
-}
 
 export function EligeEquipoSection() {
   return (
@@ -56,7 +40,15 @@ export function EligeEquipoSection() {
               {equipos.map((line) => (
                 <li key={line} className="elige-equipo__list-item">
                   <span className="elige-equipo__list-icon-wrap">
-                    <ListIcon />
+                    <img
+                      className="elige-equipo__bullet-icon"
+                      src={listIconSrc}
+                      alt=""
+                      width={27}
+                      height={27}
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </span>
                   <span className="elige-equipo__list-text">{line}</span>
                 </li>

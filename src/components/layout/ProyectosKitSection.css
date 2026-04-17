@@ -1,0 +1,56 @@
+.proyectos-kit {
+  --pk-accent: #2d9cdb;
+  position: relative;
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Detalle suave tipo mock (líneas en la esquina) */
+.proyectos-kit::before {
+  content: '';
+  position: absolute;
+  right: -4%;
+  top: -40%;
+  width: min(45%, 280px);
+  height: 140%;
+  z-index: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 200 200'%3E%3Cpath stroke='%232d9cdb' stroke-opacity='.14' stroke-width='1' d='M120 0c20 60 40 120 80 200M160 20c-30 50-60 100-100 150'/%3E%3C/svg%3E")
+    no-repeat right top / contain;
+  pointer-events: none;
+}
+
+.proyectos-kit__title {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+  max-width: min(100%, 38rem);
+  font-size: clamp(1.2rem, 3.2vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.28;
+  letter-spacing: -0.025em;
+  background-image: linear-gradient(
+    90deg,
+    #0f172a 0%,
+    #0c2d4a 18%,
+    #155e8a 42%,
+    var(--pk-accent) 68%,
+    #38bdf8 88%,
+    #7dd3fc 100%
+  );
+  background-size: 100% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+@media (max-width: 480px) {
+  .proyectos-kit__title {
+    font-size: clamp(1.05rem, 4.2vw, 1.35rem);
+  }
+}

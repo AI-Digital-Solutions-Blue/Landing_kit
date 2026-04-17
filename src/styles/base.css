@@ -9,13 +9,14 @@
   --header-focus: #0ea5e9;
   --content-max: min(1200px, 100%);
   --page-gutter: clamp(16px, 4vw, 40px);
+  --section-block-py: clamp(48px, 7vw, 96px);
   --main-bg: transparent;
   --main-fg: #f4f4f5;
   --page-bg-fallback: #0a0f14;
   --landing-bg-w: 1920;
   --landing-bg-h: 8335;
 
-  font: 18px/145% 'Poppins', system-ui, sans-serif;
+  font: 300 18px/145% 'Poppins', system-ui, sans-serif;
   letter-spacing: 0.18px;
   color-scheme: light dark;
   color: var(--text);
@@ -67,4 +68,9 @@ body {
 
 p {
   margin: 0;
+}
+
+strong,
+b {
+  font-weight: 600;
 }

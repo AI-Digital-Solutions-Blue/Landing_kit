@@ -2,18 +2,9 @@
   width: 100%;
   max-width: var(--content-max);
   margin-inline: auto;
-  margin-top: clamp(40px, 6vw, 88px);
-  padding: clamp(32px, 5vw, 72px) 0;
+  padding-left: 0;
+  padding-right: 0;
   box-sizing: border-box;
-}
-
-.steps__heading {
-  margin: 0 0 clamp(28px, 4vw, 44px);
-  font-size: clamp(1.65rem, 3.5vw, 2.2rem);
-  font-weight: 700;
-  text-align: center;
-  letter-spacing: -0.03em;
-  color: #0a0a0a;
 }
 
 .steps__list {
@@ -96,7 +87,7 @@
 .steps__text {
   margin: 0;
   font-size: clamp(0.92rem, 1.75vw, 1.02rem);
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.55;
   color: #1a1a1a;
 }

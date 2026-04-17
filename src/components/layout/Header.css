@@ -67,7 +67,10 @@
   transition:
     transform 0.15s ease,
     box-shadow 0.15s ease,
-    opacity 0.15s ease;
+    opacity 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 
   &:active {
     transform: scale(0.98);
@@ -86,7 +89,12 @@
 }
 
 .site-header__btn--outline:hover {
-  background: rgba(0, 0, 0, 0.04);
+  color: #fff;
+  background: #000;
+  border-color: #000;
+  box-shadow:
+    0 10px 32px rgba(0, 0, 0, 0.42),
+    0 4px 14px rgba(0, 0, 0, 0.32);
 }
 
 .site-header__btn--primary {
@@ -99,11 +107,15 @@
     #0c4a6e 72%,
     #020617 100%
   );
-  box-shadow: 0 1px 2px rgba(2, 6, 23, 0.12);
+  box-shadow:
+    0 1px 2px rgba(2, 6, 23, 0.12),
+    inset 0 -3px 0 0 transparent;
 }
 
 .site-header__btn--primary:hover {
-  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+  box-shadow:
+    0 4px 14px rgba(2, 132, 199, 0.35),
+    inset 0 -3px 0 0 rgba(125, 211, 252, 0.95);
 }
 
 @media (max-width: 640px) {

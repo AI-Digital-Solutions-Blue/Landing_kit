@@ -43,10 +43,7 @@ const steps = [
 
 export function StepsSection() {
   return (
-    <section className="steps" aria-labelledby="steps-heading">
-      <h2 id="steps-heading" className="steps__heading">
-        Cómo funciona
-      </h2>
+    <section className="steps" aria-label="Cómo funciona">
       <ol className="steps__list">
         {steps.map((step, index) => (
           <li key={step.title} className="steps__item">
