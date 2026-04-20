@@ -15,8 +15,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: deploy
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -38,6 +36,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd ${{ secrets.PRODUCTION_PATH }}
-            git pull origin deploy
+            git pull origin master
             npm ci
             npm run build
