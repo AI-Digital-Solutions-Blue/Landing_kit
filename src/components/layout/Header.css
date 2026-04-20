@@ -25,6 +25,7 @@
 }
 
 .site-header__brand {
+  font-family: 'Gardenia', 'Poppins', system-ui, sans-serif;
   font-weight: 500;
   font-size: clamp(2.2rem, 8vw, 3.75rem);
   letter-spacing: -0.02em;
