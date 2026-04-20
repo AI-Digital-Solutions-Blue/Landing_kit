@@ -150,7 +150,3 @@ serve -s dist
 | `npm run dev` | Start the Vite development server |
 | `npm run build` | Create an optimized production build in `dist/` |
 | `npm run preview` | Locally preview the production build |
-
-## License
-
-This project is private.
