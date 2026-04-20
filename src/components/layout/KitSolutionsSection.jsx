@@ -1,4 +1,5 @@
 import './KitSolutionsSection.css'
+import { CtaOpenModalLink } from './CtaOpenModalLink'
 
 const svg = (filename) => `/svg/${encodeURIComponent(filename)}`
 
@@ -85,9 +86,7 @@ export function KitSolutionsSection() {
         </div>
 
         <div className="kit-solutions__actions">
-          <a className="kit-solutions__btn" href="#">
-            Quiero activar mi bono
-          </a>
+          <CtaOpenModalLink className="kit-solutions__btn">Quiero activar mi bono</CtaOpenModalLink>
         </div>
       </div>
     </section>

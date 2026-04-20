@@ -48,7 +48,8 @@ html {
     100svh,
     calc(100vw * var(--landing-bg-h) / var(--landing-bg-w))
   );
-  background-color: var(--page-bg-fallback);
+  /* Base sólida bajo el SVG/PNG: los transparentes no muestran el fallback oscuro */
+  background-color: #ffffff;
   background-image: url('/landing-pc.svg');
   background-size: min(118vw, 2400px) auto;
   background-position: top center;

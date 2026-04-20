@@ -1,0 +1,168 @@
+.contact-modal__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 4vw, 32px);
+  box-sizing: border-box;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.contact-modal__panel {
+  position: relative;
+  width: min(100%, 440px);
+  max-height: min(92vh, 900px);
+  overflow: auto;
+  border-radius: clamp(16px, 2.2vw, 22px);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow:
+    0 24px 80px rgba(15, 23, 42, 0.2),
+    0 8px 32px rgba(15, 23, 42, 0.12);
+}
+
+.contact-modal__close {
+  position: absolute;
+  top: clamp(8px, 1.5vw, 12px);
+  right: clamp(8px, 1.5vw, 12px);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #64748b;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.contact-modal__close:hover {
+  color: #0f172a;
+  background: rgba(15, 23, 42, 0.06);
+}
+
+.contact-modal__close:focus-visible {
+  outline: 2px solid #2d9cdb;
+  outline-offset: 2px;
+}
+
+.contact-modal__form {
+  padding: clamp(44px, 6vw, 52px) clamp(18px, 3vw, 22px) clamp(20px, 3vw, 24px);
+}
+
+.contact-modal__form .kit-cta__form-error {
+  margin-bottom: 14px;
+}
+
+.contact-modal__form .kit-cta__form-header {
+  padding-inline: clamp(4px, 1vw, 8px);
+  margin-bottom: clamp(20px, 3vw, 26px);
+}
+
+/* Sin doble “cristal”: el panel del modal ya es la tarjeta */
+.contact-modal__form .kit-cta__glass--modal {
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .contact-modal__form .kit-cta__glass--modal {
+    background: transparent;
+  }
+}
+
+/* Título: dos renglones, mismo degradado que el botón (.kit-cta__grad-text) */
+.contact-modal__form .kit-cta__form-kicker--modal-two-lines {
+  margin: 0;
+  text-align: center;
+}
+
+.contact-modal__form .kit-cta__form-kicker--modal-grad-block {
+  display: inline-block;
+  max-width: 22em;
+  font-size: clamp(0.82rem, 2.2vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Campos: fondo blanco, borde fino gris */
+.contact-modal__form .kit-cta__fields {
+  gap: 14px;
+}
+
+.contact-modal__form .kit-cta__input,
+.contact-modal__form .kit-cta__select {
+  border: 1px solid #e2e8f0;
+  box-shadow: none;
+}
+
+.contact-modal__form .kit-cta__input:focus,
+.contact-modal__form .kit-cta__select:focus {
+  box-shadow: 0 0 0 2px rgba(45, 156, 219, 0.35);
+}
+
+.contact-modal__form .kit-cta__input::placeholder {
+  color: #94a3b8;
+}
+
+/* CTA: fondo blanco; texto con el mismo degradado (.kit-cta__grad-text) */
+.contact-modal__form .kit-cta__submit {
+  margin-top: clamp(18px, 2.5vw, 22px);
+  padding: 14px 20px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+.contact-modal__form .kit-cta__submit:hover {
+  background: #f8fafc;
+  border-color: rgba(45, 156, 219, 0.45);
+  box-shadow: none;
+}
+
+.contact-modal__form .kit-cta__submit .kit-cta__submit-label {
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: clamp(0.72rem, 1.5vw, 0.82rem);
+}
+
+/* Forzar degradado visible en modal (título y CTA) */
+.contact-modal__form .kit-cta__form-kicker--modal-grad-block.kit-cta__grad-text,
+.contact-modal__form .kit-cta__submit-label.kit-cta__grad-text {
+  background-image: linear-gradient(
+    90deg,
+    #000000 0%,
+    #0a0a0a 14%,
+    #1a4f7a 40%,
+    #2d9cdb 62%,
+    #3498db 82%,
+    #5dade2 100%
+  );
+  background-size: 100% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}

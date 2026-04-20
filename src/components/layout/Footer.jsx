@@ -1,4 +1,5 @@
 import './Footer.css'
+import { CtaOpenModalLink } from './CtaOpenModalLink'
 
 function IconInstagram() {
   return (
@@ -57,24 +58,32 @@ export function Footer() {
             <h2 className="site-footer__heading">Saber más</h2>
             <ul className="site-footer__list">
               <li>
-                <a className="site-footer__link" href="#">
+                <a
+                  className="site-footer__link"
+                  href="https://siweb.es/news"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
                   Sobre Siweb
                 </a>
               </li>
               <li>
-                <a className="site-footer__link" href="#">
+                <a
+                  className="site-footer__link"
+                  href="https://siweb.es/news"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
                   Prensa
                 </a>
               </li>
               <li>
-                <a className="site-footer__link" href="#">
+                <a className="site-footer__link" href="/#privacidad">
                   Política de Privacidad
                 </a>
               </li>
               <li>
-                <a className="site-footer__link" href="#">
-                  Contacta con nosotros
-                </a>
+                <CtaOpenModalLink className="site-footer__link">Contacta con nosotros</CtaOpenModalLink>
               </li>
             </ul>
           </div>
@@ -82,24 +91,27 @@ export function Footer() {
             <h2 className="site-footer__heading">Plataformas</h2>
             <ul className="site-footer__list">
               <li>
-                <a className="site-footer__link" href="#">
+                <a
+                  className="site-footer__link"
+                  href="https://sygna.es/"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
                   Sygna
                 </a>
               </li>
               <li>
-                <a className="site-footer__link" href="#">
-                  Tu Mesa Ya!
+                <a
+                  className="site-footer__link"
+                  href="https://tumesaya.com/"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  tumesaya
                 </a>
               </li>
               <li>
-                <a className="site-footer__link" href="#">
-                  Alvoot
-                </a>
-              </li>
-              <li>
-                <a className="site-footer__link" href="#">
-                  Tu Ruta Ya!
-                </a>
+                <CtaOpenModalLink className="site-footer__link">Tu Ruta Ya!</CtaOpenModalLink>
               </li>
             </ul>
           </div>
@@ -125,7 +137,7 @@ export function Footer() {
             <div className="site-footer__social">
               <a
                 className="site-footer__social-link"
-                href="https://instagram.com"
+                href="https://www.instagram.com/siweb.es/"
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label="Instagram"
@@ -134,7 +146,7 @@ export function Footer() {
               </a>
               <a
                 className="site-footer__social-link"
-                href="https://facebook.com"
+                href="https://www.facebook.com/siweb.es/"
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label="Facebook"
@@ -143,7 +155,7 @@ export function Footer() {
               </a>
               <a
                 className="site-footer__social-link"
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/showcase/siweb.es"
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label="LinkedIn"
@@ -158,11 +170,11 @@ export function Footer() {
             © {year} Siweb | Todos los derechos reservados.
           </p>
           <p className="site-footer__legal site-footer__legal--right">
-            <a className="site-footer__link site-footer__link--muted" href="#">
+            <a className="site-footer__link site-footer__link--muted" href="#terminos">
               Términos y condiciones
             </a>
             <span className="site-footer__sep">,</span>{' '}
-            <a className="site-footer__link site-footer__link--muted" href="#">
+            <a className="site-footer__link site-footer__link--muted" href="#privacidad">
               Política de Privacidad
             </a>
           </p>

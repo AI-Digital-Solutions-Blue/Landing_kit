@@ -54,7 +54,7 @@ export function EligeEquipoSection() {
                 </li>
               ))}
             </ul>
-            <a className="elige-equipo__btn" href="#">
+            <a className="elige-equipo__btn" href="/descargas/Catalogo.pdf" download>
               Descargar PDF
             </a>
           </div>

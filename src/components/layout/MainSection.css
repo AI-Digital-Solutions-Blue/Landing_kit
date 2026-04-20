@@ -223,12 +223,12 @@
 }
 
 .hero__btn--outline:hover {
-  color: #fff;
-  background: #000;
-  border-color: #000;
+  color: #0a0a0a;
+  background: #fff;
+  border-color: #0a0a0a;
   box-shadow:
-    0 10px 32px rgba(0, 0, 0, 0.42),
-    0 4px 14px rgba(0, 0, 0, 0.32);
+    0 10px 32px rgba(0, 0, 0, 0.38),
+    0 4px 14px rgba(0, 0, 0, 0.28);
 }
 
 .hero__btn--solid {
@@ -238,12 +238,11 @@
 }
 
 .hero__btn--solid:hover {
-  background: #3d3d3d;
-  border-color: #3d3d3d;
+  background: var(--hero-dark);
+  border-color: var(--hero-dark);
   box-shadow:
     0 10px 32px rgba(0, 0, 0, 0.38),
-    0 4px 14px rgba(0, 0, 0, 0.28),
-    inset 0 -3px 0 0 #000;
+    0 4px 14px rgba(0, 0, 0, 0.28);
 }
 
 .hero__btn:focus-visible {

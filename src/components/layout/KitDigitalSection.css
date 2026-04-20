@@ -91,12 +91,11 @@
 }
 
 .kit-digital__btn:hover {
-  background: #2d2d2d;
-  border-color: #2d2d2d;
+  background: #1a1a1a;
+  border-color: #1a1a1a;
   box-shadow:
-    0 12px 34px rgba(0, 0, 0, 0.4),
-    0 5px 16px rgba(0, 0, 0, 0.3),
-    inset 0 -3px 0 0 #000;
+    0 10px 32px rgba(0, 0, 0, 0.38),
+    0 4px 14px rgba(0, 0, 0, 0.28);
 }
 
 .kit-digital__btn:focus-visible {

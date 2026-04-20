@@ -1,4 +1,5 @@
 import './Header.css'
+import { CtaOpenModalLink } from './CtaOpenModalLink'
 
 export function Header() {
   return (
@@ -11,9 +12,7 @@ export function Header() {
           <a className="site-header__btn site-header__btn--outline" href="tel:+34900000000">
             Llámanos
           </a>
-          <a className="site-header__btn site-header__btn--primary" href="#">
-            Quiero mi bono
-          </a>
+          <CtaOpenModalLink className="site-header__btn site-header__btn--primary">Quiero mi bono</CtaOpenModalLink>
         </div>
       </div>
     </header>

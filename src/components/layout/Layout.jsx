@@ -12,10 +12,12 @@ import { ProyectosKitSection } from './ProyectosKitSection'
 import { KitCtaFormSection } from './KitCtaFormSection'
 import { StepsSection } from './StepsSection'
 import { Footer } from './Footer'
+import { ContactFormModal } from './ContactFormModal'
 
 export function Layout() {
   return (
     <>
+      <ContactFormModal />
       <Header />
       <main className="site-main">
         <MainSection />

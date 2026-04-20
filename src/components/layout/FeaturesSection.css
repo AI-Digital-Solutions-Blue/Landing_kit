@@ -1,6 +1,5 @@
 .features {
   --hero-accent: #2d9cdb;
-  position: relative;
   width: 100%;
   max-width: var(--content-max);
   margin-inline: auto;
@@ -9,23 +8,10 @@
   box-sizing: border-box;
 }
 
-.features::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: radial-gradient(ellipse 90% 70% at 50% 100%, rgba(45, 156, 219, 0.09), transparent 58%);
-  pointer-events: none;
-}
-
-.features > * {
-  position: relative;
-  z-index: 1;
-}
-
 /* Mismo criterio que .hero__title: degradado horizontal en el h2; una sola línea */
 .features__title {
   margin: 0 auto clamp(36px, 5vw, 56px);
+  padding-block: 3px;
   max-width: none;
   width: fit-content;
   max-width: min(100%, calc(100vw - 2 * var(--page-gutter)));
@@ -150,12 +136,11 @@
 }
 
 .features__btn:hover {
-  background: #2d2d2d;
-  border-color: #2d2d2d;
+  background: #1a1a1a;
+  border-color: #1a1a1a;
   box-shadow:
     0 10px 32px rgba(0, 0, 0, 0.38),
-    0 4px 14px rgba(0, 0, 0, 0.28),
-    inset 0 -3px 0 0 #000;
+    0 4px 14px rgba(0, 0, 0, 0.28);
 }
 
 .features__btn:focus-visible {

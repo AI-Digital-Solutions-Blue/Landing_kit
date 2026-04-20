@@ -1,4 +1,5 @@
 import './KitDigitalSection.css'
+import { CtaOpenModalLink } from './CtaOpenModalLink'
 
 const imageSrc = `/imagenes/${encodeURIComponent('img4.jpg')}`
 
@@ -18,9 +19,7 @@ export function KitDigitalSection() {
             han activado. En <strong>Siweb</strong> te ayudamos a convertirlo en una solución práctica, útil y
             fácil de poner en marcha.
           </p>
-          <a className="kit-digital__btn" href="#">
-            Quiero activar mi bono
-          </a>
+          <CtaOpenModalLink className="kit-digital__btn">Quiero activar mi bono</CtaOpenModalLink>
         </div>
         <div className="kit-digital__media">
           <img
