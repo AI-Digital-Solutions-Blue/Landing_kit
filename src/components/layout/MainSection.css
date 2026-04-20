@@ -318,15 +318,15 @@
 .hero__img {
   position: relative;
   display: block;
-  width: min(1980px, 420%);
+  width: min(2800px, 600%);
   max-width: none;
   height: auto;
   margin: 0;
   margin-left: auto;
   object-fit: contain;
   /* Desplazamiento respecto a la posición final del flex (sustituye al translate): */
-  left: clamp(110px, 18vw, 560px);
-  top: clamp(8px, 2vw, 28px);
+  left: clamp(150px, 21vw, 620px);
+  top: clamp(44px, 5.5vw, 80px);
   right: auto;
   pointer-events: auto;
 

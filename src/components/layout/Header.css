@@ -100,7 +100,12 @@
 
 .site-header__btn--primary {
   color: #fff;
-  border-color: transparent;
+  /* Sin borde: 1px + degradado + border-radius suele dejar una línea/hairline en el arco */
+  border: none;
+  overflow: hidden;
+  isolation: isolate;
+  transform: translateZ(0);
+  backface-visibility: hidden;
   background: linear-gradient(
     90deg,
     #38bdf8 0%,

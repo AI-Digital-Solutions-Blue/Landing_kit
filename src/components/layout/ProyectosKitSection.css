@@ -4,8 +4,7 @@
   width: 100%;
   max-width: var(--content-max);
   margin-inline: auto;
-  padding-left: 0;
-  padding-right: 0;
+  padding-inline: var(--page-gutter);
   text-align: center;
   box-sizing: border-box;
 }
@@ -28,8 +27,10 @@
   position: relative;
   z-index: 1;
   margin: 0 auto;
-  max-width: min(100%, 38rem);
-  font-size: clamp(1.2rem, 3.2vw, 1.75rem);
+  max-width: none;
+  display: inline-block;
+  white-space: nowrap;
+  font-size: clamp(1.45rem, 3.8vw, 2.15rem);
   font-weight: 600;
   line-height: 1.28;
   letter-spacing: -0.025em;
@@ -49,8 +50,11 @@
   color: transparent;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .proyectos-kit__title {
-    font-size: clamp(1.05rem, 4.2vw, 1.35rem);
+    white-space: normal;
+    display: block;
+    max-width: 100%;
+    font-size: clamp(1.2rem, 4.8vw, 1.65rem);
   }
 }

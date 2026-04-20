@@ -1,3 +1,7 @@
+.site-footer a {
+  text-decoration: none;
+}
+
 .site-footer {
   --footer-fg: #fff;
   --footer-fg-muted: rgba(255, 255, 255, 0.72);
@@ -121,8 +125,6 @@
 
   &:hover {
     opacity: 0.85;
-    text-decoration: underline;
-    text-underline-offset: 3px;
   }
 
   &:focus-visible {

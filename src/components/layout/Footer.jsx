@@ -107,11 +107,18 @@ export function Footer() {
                   target="_blank"
                   rel="noreferrer noopener"
                 >
-                  tumesaya
+                  Tu mesa ya!
                 </a>
               </li>
               <li>
-                <CtaOpenModalLink className="site-footer__link">Tu Ruta Ya!</CtaOpenModalLink>
+                <a
+                  className="site-footer__link"
+                  href="https://turutaya.es/"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  Tu Ruta Ya!
+                </a>
               </li>
             </ul>
           </div>
