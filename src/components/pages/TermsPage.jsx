@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import termsArticleHtml from '../../legal/terms-article.html?raw'
 import './TermsPage.css'
 
-const DEFAULT_TITLE = 'landing-kit'
+const DEFAULT_TITLE = 'Kit Digital | Siweb'
 
 export function goToHome(event) {
   event?.preventDefault?.()

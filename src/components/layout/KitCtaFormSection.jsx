@@ -25,7 +25,7 @@ export function KitCtaFormSection() {
           </p>
           <div className="kit-cta__actions">
             <CtaOpenModalLink className="kit-cta__btn kit-cta__btn--primary">Quiero aprovechar mi bono</CtaOpenModalLink>
-            <a className="kit-cta__btn kit-cta__btn--ghost" href="tel:+34911096389">
+            <a className="kit-cta__btn kit-cta__btn--ghost" href="tel:+34886020705">
               Hablar con un asesor
             </a>
           </div>
