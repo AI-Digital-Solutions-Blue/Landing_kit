@@ -9,7 +9,7 @@ export function Header() {
           Siweb
         </a>
         <div className="site-header__actions">
-          <a className="site-header__btn site-header__btn--outline" href="tel:+34886020705">
+          <a className="site-header__btn site-header__btn--outline" href="tel:+34828151082">
             Llámanos
           </a>
           <CtaOpenModalLink className="site-header__btn site-header__btn--primary">Quiero mi bono</CtaOpenModalLink>

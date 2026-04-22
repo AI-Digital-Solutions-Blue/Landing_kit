@@ -127,8 +127,8 @@ export function Footer() {
             <ul className="site-footer__list site-footer__list--plain">
               <li>
                 Teléfono:{' '}
-                <a className="site-footer__link" href="tel:+34886020705">
-                  +34 886 020 705
+                <a className="site-footer__link" href="tel:+34828151082">
+                  +34 828 151 082
                 </a>
               </li>
               <li>
