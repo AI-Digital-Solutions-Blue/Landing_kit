@@ -32,6 +32,7 @@ export function KitDigitalSection() {
             decoding="async"
           />
         </div>
+        
       </div>
     </section>
   )
