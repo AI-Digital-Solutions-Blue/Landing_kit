@@ -1,21 +1,26 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useContactModal } from '../../context/ContactModalContext'
 import { useLeadFormSubmit } from '../../hooks/useLeadFormSubmit'
 import { KitCtaFormBody } from './KitCtaFormBody'
 import { KitCtaFormSuccess } from './KitCtaFormSuccess'
+import { focusFirstInvalidField, validateLeadForm } from './leadFormValidation'
 import './KitCtaFormSection.css'
 import './ContactFormModal.css'
 
 export function ContactFormModal() {
   const { isOpen, closeModal } = useContactModal()
   const { status, errorMessage, submitForm, reset } = useLeadFormSubmit()
+  const [fieldErrors, setFieldErrors] = useState({})
+  const [hasSubmittedOnce, setHasSubmittedOnce] = useState(false)
   const panelRef = useRef(null)
   const previouslyFocused = useRef(null)
 
   useEffect(() => {
     if (!isOpen) {
       reset()
+      setFieldErrors({})
+      setHasSubmittedOnce(false)
     }
   }, [isOpen, reset])
 
@@ -50,6 +55,12 @@ export function ContactFormModal() {
 
   if (!isOpen) return null
 
+  const handleValidateOnEdit = (e) => {
+    if (!hasSubmittedOnce) return
+    const form = e.currentTarget
+    setFieldErrors(validateLeadForm(form))
+  }
+
   return createPortal(
     <div
       className="contact-modal__backdrop"
@@ -73,9 +84,19 @@ export function ContactFormModal() {
           className="kit-cta__form contact-modal__form"
           onSubmit={(e) => {
             e.preventDefault()
-            submitForm(e.currentTarget)
+            const form = e.currentTarget
+            const errors = validateLeadForm(form)
+            setHasSubmittedOnce(true)
+            setFieldErrors(errors)
+            if (Object.keys(errors).length > 0) {
+              focusFirstInvalidField(form, errors)
+              return
+            }
+            submitForm(form)
           }}
           noValidate
+          onInput={handleValidateOnEdit}
+          onChange={handleValidateOnEdit}
         >
           {status === 'success' ? (
             <KitCtaFormSuccess variant="modal" />
@@ -86,7 +107,11 @@ export function ContactFormModal() {
                   {errorMessage}
                 </p>
               ) : null}
-              <KitCtaFormBody variant="modal" isSubmitting={status === 'loading'} />
+              <KitCtaFormBody
+                variant="modal"
+                isSubmitting={status === 'loading'}
+                fieldErrors={fieldErrors}
+              />
             </>
           )}
         </form>

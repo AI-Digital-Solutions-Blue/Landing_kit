@@ -15,7 +15,7 @@ export function KitCtaFormSuccess({ variant = 'section' }) {
         ¡Hemos recibido sus datos!
       </p>
       <p className="kit-cta__success-line">
-        En las próximas 24 h nos pondremos en contacto con usted.
+        Pronto nos pondremos en contacto con usted.
       </p>
       <p className="kit-cta__success-signoff">
         Muchas gracias,

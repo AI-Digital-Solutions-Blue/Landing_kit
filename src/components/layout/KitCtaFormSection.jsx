@@ -1,15 +1,33 @@
+import { useState } from 'react'
 import './KitCtaFormSection.css'
 import { useLeadFormSubmit } from '../../hooks/useLeadFormSubmit'
 import { CtaOpenModalLink } from './CtaOpenModalLink'
 import { KitCtaFormBody } from './KitCtaFormBody'
 import { KitCtaFormSuccess } from './KitCtaFormSuccess'
+import { focusFirstInvalidField, validateLeadForm } from './leadFormValidation'
 
 export function KitCtaFormSection() {
   const { status, errorMessage, submitForm } = useLeadFormSubmit()
+  const [fieldErrors, setFieldErrors] = useState({})
+  const [hasSubmittedOnce, setHasSubmittedOnce] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    submitForm(e.currentTarget)
+    const form = e.currentTarget
+    const errors = validateLeadForm(form)
+    setHasSubmittedOnce(true)
+    setFieldErrors(errors)
+    if (Object.keys(errors).length > 0) {
+      focusFirstInvalidField(form, errors)
+      return
+    }
+    submitForm(form)
+  }
+
+  const handleValidateOnEdit = (e) => {
+    if (!hasSubmittedOnce) return
+    const form = e.currentTarget
+    setFieldErrors(validateLeadForm(form))
   }
 
   return (
@@ -31,7 +49,13 @@ export function KitCtaFormSection() {
           </div>
         </div>
 
-        <form className="kit-cta__form" onSubmit={handleSubmit} noValidate>
+        <form
+          className="kit-cta__form"
+          onSubmit={handleSubmit}
+          noValidate
+          onInput={handleValidateOnEdit}
+          onChange={handleValidateOnEdit}
+        >
           {status === 'success' ? (
             <KitCtaFormSuccess variant="section" />
           ) : (
@@ -41,7 +65,11 @@ export function KitCtaFormSection() {
                   {errorMessage}
                 </p>
               ) : null}
-              <KitCtaFormBody variant="section" isSubmitting={status === 'loading'} />
+              <KitCtaFormBody
+                variant="section"
+                isSubmitting={status === 'loading'}
+                fieldErrors={fieldErrors}
+              />
             </>
           )}
         </form>

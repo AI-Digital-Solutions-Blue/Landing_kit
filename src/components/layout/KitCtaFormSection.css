@@ -224,6 +224,16 @@
   margin: 0;
 }
 
+.kit-cta__field-error {
+  display: block;
+  margin-top: 6px;
+  padding-left: 2px;
+  font-size: clamp(0.72rem, 1.25vw, 0.78rem);
+  font-weight: 500;
+  line-height: 1.35;
+  color: #b91c1c;
+}
+
 .kit-cta__input,
 .kit-cta__select {
   width: 100%;
@@ -252,6 +262,20 @@
   box-shadow:
     0 8px 28px rgba(45, 156, 219, 0.32),
     0 0 0 4px rgba(45, 156, 219, 0.26);
+}
+
+.kit-cta__input--invalid,
+.kit-cta__select--invalid {
+  box-shadow:
+    0 8px 28px rgba(239, 68, 68, 0.18),
+    0 0 0 4px rgba(239, 68, 68, 0.18);
+}
+
+.kit-cta__input--invalid:focus,
+.kit-cta__select--invalid:focus {
+  box-shadow:
+    0 8px 28px rgba(239, 68, 68, 0.2),
+    0 0 0 4px rgba(239, 68, 68, 0.24);
 }
 
 .kit-cta__select {
