@@ -1,9 +1,9 @@
 /* Rompe el padding lateral de .site-main y ocupa todo el ancho del viewport */
 .promo-strip {
-  width: calc(100% + 2 * var(--page-gutter));
+  width: 100vw;
   max-width: 100vw;
-  margin-left: calc(-1 * var(--page-gutter));
-  margin-right: calc(-1 * var(--page-gutter));
+  margin-left: 50%;
+  transform: translateX(-50%);
   box-sizing: border-box;
 }
 
