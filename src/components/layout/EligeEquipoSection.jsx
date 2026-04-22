@@ -44,6 +44,7 @@ export function EligeEquipoSection() {
                       className="elige-equipo__bullet-icon"
                       src={listIconSrc}
                       alt=""
+                      
                       width={27}
                       height={27}
                       loading="lazy"
