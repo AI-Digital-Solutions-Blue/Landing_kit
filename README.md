@@ -1,5 +1,6 @@
 # Landing Kit
 
+
 Landing page for the **Kit Digital** programme built with **React 18** and **Vite 6**.
 The site showcases the digital-kit solutions catalogue, collects leads via a contact form (webhook integration with Make.com), and includes legal pages (terms & privacy).
 
