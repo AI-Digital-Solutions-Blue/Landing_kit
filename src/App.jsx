@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { syncGoogleAdsPagePath } from './lib/adsGtag'
 import './styles/base.css'
 import './styles/poppins-weights.css'
 import './styles/layout.css'
@@ -25,6 +26,10 @@ export default function App() {
     window.addEventListener('hashchange', onHashChange)
     return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
+
+  useEffect(() => {
+    syncGoogleAdsPagePath()
+  }, [route])
 
   return (
     <ContactModalProvider>

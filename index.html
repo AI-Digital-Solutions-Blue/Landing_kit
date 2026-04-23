@@ -2,6 +2,21 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <!-- Google tag (gtag.js) — lo antes posible en <head> (recomendación Google Ads). Si en GTM ya publicas el mismo AW-18108890308, quita este bloque para no duplicar. -->
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://www.googleadservices.com" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18108890308"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'AW-18108890308', {
+        allow_google_signals: true,
+        allow_ad_personalization_signals: true,
+      });
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,16 +27,6 @@
     <link rel="preload" href="/landing-pc.svg" as="image" type="image/svg+xml" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kit Digital | Siweb Canarias</title>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18108890308"></script>
-    <script>
-      window.dataLayer = window.dataLayer || []
-      function gtag() {
-        dataLayer.push(arguments)
-      }
-      gtag('js', new Date())
-      gtag('config', 'AW-18108890308')
-    </script>
   </head>
   <body>
     <div id="root"></div>
