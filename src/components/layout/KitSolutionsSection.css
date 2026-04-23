@@ -127,12 +127,27 @@
   line-height: 0;
 }
 
+/* monitor.svg usa trazo blanco: fondo para contraste sobre #f8f9fa */
+.kit-solutions__icon-wrap--monitor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: clamp(8px, 1.1vw, 10px);
+  border-radius: clamp(10px, 1.4vw, 14px);
+  background: linear-gradient(145deg, #2d9cdb 0%, #1a6fa8 55%, #1565a8 100%);
+}
+
 .kit-solutions__icon {
   display: block;
   width: 100%;
   height: auto;
   max-width: 52px;
   object-fit: contain;
+}
+
+.kit-solutions__icon--monitor {
+  max-width: 28px;
 }
 
 .kit-solutions__body {

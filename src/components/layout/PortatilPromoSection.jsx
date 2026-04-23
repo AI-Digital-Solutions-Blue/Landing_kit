@@ -1,18 +1,8 @@
 import './PortatilPromoSection.css'
-
-function getPromoVariant() {
-  if (typeof window === 'undefined') return 'es'
-  if (import.meta.env.DEV) {
-    const promo = new URLSearchParams(window.location.search).get('promo')
-    if (promo === 'com' || promo === 'es') return promo
-  }
-  const host = window.location.hostname.toLowerCase()
-  if (host.endsWith('.com')) return 'com'
-  return 'es'
-}
+import { getSiteVariant } from '../../utils/siteVariant'
 
 export function PortatilPromoSection() {
-  const variant = getPromoVariant()
+  const variant = getSiteVariant()
   const isEs = variant === 'es'
 
   return (
@@ -37,13 +27,13 @@ export function PortatilPromoSection() {
             </>
           ) : (
             <>
-              <p className="promo-strip__paragraph">Consume tu bono con nosotros y te regalamos a</p>
+              <p className="promo-strip__paragraph">Consume tu bono con nosotros y te regalamos la</p>
               <p className="promo-strip__paragraph">gestión de clientes y facturación electrónica con</p>
               <p className="promo-strip__paragraph">Verifactu, control horario y portátil incluidos</p>
             </>
           )}
         </div>
-      </div>
+      </div> 
     </section>
   )
 }

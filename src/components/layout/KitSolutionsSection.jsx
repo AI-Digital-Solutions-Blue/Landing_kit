@@ -3,7 +3,15 @@ import { CtaOpenModalLink } from './CtaOpenModalLink'
 
 const svg = (filename) => `/svg/${encodeURIComponent(filename)}`
 
-/** Columna izquierda: Group 1–3. Columna derecha: Group 4–6 (`public/svg/Group1.svg` … `Group6.svg`). */
+/** Query fija para evitar caché del navegador/CDN con un `monitor.svg` antiguo */
+const monitorIconSrc = '/monitor.svg?v=2'
+
+function solutionIconSrc(item) {
+  if (item.iconSrc) return item.iconSrc
+  return svg(`Group${item.group}.svg`)
+}
+
+/** Columna izquierda: Group 1–3. Columna derecha: Group 4–6 (icono monitor → `public/monitor.svg`). */
 const solutions = [
   {
     group: 1,
@@ -32,6 +40,7 @@ const solutions = [
   },
   {
     group: 6,
+    iconSrc: monitorIconSrc,
     title: 'Puesto de trabajo seguro',
     body: 'Equipa tu actividad con una solución orientada a trabajar con más seguridad.',
   },
@@ -43,12 +52,19 @@ const rightCol = solutions.slice(3)
 function SolutionsColumn({ items }) {
   return (
     <ul className="kit-solutions__col">
-      {items.map((item) => (
+      {items.map((item) => {
+        const isMonitor = Boolean(item.iconSrc)
+        const src = solutionIconSrc(item)
+        return (
         <li key={item.title} className="kit-solutions__item">
-          <div className="kit-solutions__icon-wrap" aria-hidden="true">
+          <div
+            className={`kit-solutions__icon-wrap${isMonitor ? ' kit-solutions__icon-wrap--monitor' : ''}`}
+            aria-hidden="true"
+          >
             <img
-              className="kit-solutions__icon"
-              src={svg(`Group${item.group}.svg`)}
+              className={`kit-solutions__icon${isMonitor ? ' kit-solutions__icon--monitor' : ''}`}
+              src={src}
+              key={src}
               alt=""
               width={48}
               height={48}
@@ -61,7 +77,8 @@ function SolutionsColumn({ items }) {
             <p className="kit-solutions__item-text">{item.body}</p>
           </div>
         </li>
-      ))}
+        )
+      })}
     </ul>
   )
 }

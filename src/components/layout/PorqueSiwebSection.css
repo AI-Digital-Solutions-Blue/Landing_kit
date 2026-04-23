@@ -166,7 +166,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: clamp(20px, 3vw, 28px);
+  gap: clamp(12px, 2vw, 18px);
   padding: clamp(28px, 4vw, 44px) clamp(24px, 4vw, 40px) clamp(28px, 4vw, 44px) clamp(20px, 3vw, 32px);
   text-align: left;
   box-sizing: border-box;
@@ -208,7 +208,7 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: clamp(20px, 2.5vw, 24px);
+  gap: clamp(10px, 1.5vw, 16px);
 }
 
 .porque-siweb__item {
@@ -219,16 +219,17 @@
 
 .porque-siweb__item-icon {
   flex-shrink: 0;
-  width: 22px;
-  height: 22px;
-  margin-top: 2px;
+  width: clamp(22px, 3vw, 30px);
+  height: auto;
+  margin-top: 1px;
   line-height: 0;
 }
 
 .porque-siweb__tick {
   display: block;
-  width: 22px;
-  height: 22px;
+  width: 100%;
+  max-width: 30px;
+  height: auto;
   object-fit: contain;
 }
 
@@ -237,7 +238,7 @@
 }
 
 .porque-siweb__item-title {
-  margin: 0 0 clamp(6px, 1vw, 8px);
+  margin: 0 0 clamp(4px, 0.75vw, 6px);
   font-size: clamp(1.02rem, 1.9vw, 1.12rem);
   font-weight: 700;
   line-height: 1.3;

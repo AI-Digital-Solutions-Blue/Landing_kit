@@ -1,7 +1,7 @@
 import './PorqueSiwebSection.css'
 
 const imageSrc = `/imagenes/${encodeURIComponent('team.png')}`
-const tickSrc = `/svg/${encodeURIComponent('tick.svg')}`
+const tickSrc = '/tick.svg'
 
 const items = [
   {
@@ -53,7 +53,7 @@ export function PorqueSiwebSection() {
               {items.map((item) => (
                 <li key={item.title} className="porque-siweb__item">
                   <span className="porque-siweb__item-icon" aria-hidden="true">
-                    <img className="porque-siweb__tick" src={tickSrc} alt="" width={22} height={22} loading="lazy" decoding="async" />
+                    <img className="porque-siweb__tick" src={tickSrc} alt="" width={30} height={30} loading="lazy" decoding="async" />
                   </span>
                   <div className="porque-siweb__item-body">
                     <h3 className="porque-siweb__item-title">{item.title}</h3>

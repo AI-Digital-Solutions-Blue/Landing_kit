@@ -56,6 +56,11 @@
   box-sizing: border-box;
 }
 
+/* Variante .com: bloque titular + lead + perks + CTA más compacto */
+.hero__content-box--com {
+  gap: clamp(10px, 1.8vw, 16px);
+}
+
 .hero__badge {
   display: inline-flex;
   align-self: flex-start;
@@ -82,7 +87,9 @@
 .hero__badge-icon {
   flex-shrink: 0;
   display: block;
-  color: #fff;
+  width: 26px;
+  height: auto;
+  object-fit: contain;
 }
 
 .hero__badge-text {
@@ -114,9 +121,11 @@
   gap: 0.03em;
   font-size: var(--hero-title-size);
   font-weight: 400;
-  line-height: 1.05;
+  /* Evita recortar descendentes (g, y, p) con background-clip: text */
+  line-height: 1.18;
   letter-spacing: -0.035em;
   text-align: left;
+  overflow: visible;
   background-image: linear-gradient(
     90deg,
     #000000 0%,
@@ -135,7 +144,9 @@
 
 .hero__title-line {
   display: block;
-  line-height: 1.05;
+  line-height: 1.18;
+  padding-bottom: 0.06em;
+  overflow: visible;
 }
 
 .hero__subtitle {
@@ -164,6 +175,11 @@
   color: transparent;
 }
 
+.hero__subtitle.hero__subtitle--com {
+  margin-top: clamp(2px, 0.45vw, 6px);
+  padding-bottom: 0.02em;
+}
+
 /* Los spans no deben pintar color sólido encima del degradado */
 .hero__title .hero__accent,
 .hero__subtitle .hero__accent {
@@ -173,6 +189,18 @@
 
 .hero__accent {
   color: var(--hero-accent);
+}
+
+.hero__lead-stack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 1vw, 10px);
+  width: fit-content;
+  max-width: 100%;
+}
+
+.hero__content-box--com .hero__lead-stack {
+  margin-top: clamp(-4px, -0.4vw, 0);
 }
 
 .hero__lead {
@@ -191,11 +219,55 @@
   color: inherit;
 }
 
+.hero__perks {
+  list-style: none;
+  margin: clamp(-4px, -0.5vw, 0) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px clamp(18px, 3vw, 28px);
+  font-size: clamp(0.92rem, 1.9vw, 1.02rem);
+  font-weight: 400;
+  color: #1a1a1a;
+}
+
+.hero__perks-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero__perks-icon-wrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.hero__perk-icon {
+  display: block;
+  width: clamp(22px, 3.2vw, 30px);
+  height: auto;
+}
+
+.hero__perks-text {
+  line-height: 1.35;
+}
+
+.hero__content-box--com .hero__perks {
+  margin-top: clamp(-6px, -0.7vw, -2px);
+}
+
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 14px 16px;
   margin-top: clamp(4px, 1.2vw, 12px);
+}
+
+.hero__content-box--com .hero__actions {
+  margin-top: 0;
 }
 
 .hero__btn {
