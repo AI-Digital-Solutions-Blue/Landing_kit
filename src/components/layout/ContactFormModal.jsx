@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useContactModal } from '../../context/ContactModalContext'
 import { useLeadFormSubmit } from '../../hooks/useLeadFormSubmit'
+import { CALLBACK_REQUEST_URL } from '../../config/leadWebhook'
 import './ContactFormModal.css'
 
 function isValidPhone(value) {
@@ -11,7 +12,10 @@ function isValidPhone(value) {
 
 export function ContactFormModal() {
   const { isOpen, closeModal } = useContactModal()
-  const { status, errorMessage, submitForm, reset } = useLeadFormSubmit()
+  const { status, errorMessage, successMessage, submitForm, reset } = useLeadFormSubmit({
+    endpoint: CALLBACK_REQUEST_URL,
+    mode: 'callback',
+  })
   const [fieldErrors, setFieldErrors] = useState({})
   const [hasSubmittedOnce, setHasSubmittedOnce] = useState(false)
   const panelRef = useRef(null)
@@ -141,7 +145,7 @@ export function ContactFormModal() {
             <p className="contact-modal__callback-title">Nosotros te llamamos</p>
             {status === 'success' ? (
               <p className="contact-modal__success" role="status" aria-live="polite">
-                Perfecto, hemos recibido tus datos y te llamamos en breve.
+                {successMessage || 'Perfecto, hemos recibido tus datos y te llamamos en breve.'}
               </p>
             ) : (
               <>
