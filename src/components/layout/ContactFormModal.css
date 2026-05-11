@@ -9,15 +9,15 @@
   border-radius: 22px;
   background: linear-gradient(
     180deg,
-    rgba(56, 189, 248, 0.42) 0%,
-    rgba(2, 6, 23, 0.36) 52%,
-    rgba(255, 255, 255, 0.78) 100%
+    rgba(15, 23, 42, 0.42) 0%,
+    rgba(2, 6, 23, 0.38) 52%,
+    rgba(71, 85, 105, 0.34) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.32);
   box-shadow:
-    0 24px 42px rgba(25, 24, 45, 0.26),
-    0 8px 20px rgba(15, 23, 42, 0.14),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    0 24px 42px rgba(15, 23, 42, 0.3),
+    0 8px 20px rgba(2, 6, 23, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
   backdrop-filter: blur(16px) saturate(132%);
   -webkit-backdrop-filter: blur(16px) saturate(132%);
   transform-origin: bottom right;
@@ -214,7 +214,7 @@
 .contact-modal__hours {
   margin: 10px 0 2px;
   text-align: center;
-  color: #516079;
+  color: rgba(255, 255, 255, 0.78);
   font-size: 0.76rem;
 }
 

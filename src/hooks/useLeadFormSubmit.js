@@ -1,8 +1,6 @@
 import { useCallback, useState } from 'react'
 import { LEAD_WEBHOOK_URL } from '../config/leadWebhook'
 
-const DAILY_SUBMIT_LIMIT = 3
-
 function withTimeout(promise, ms) {
   return Promise.race([
     promise,
@@ -42,44 +40,6 @@ function getClientMetadata(form) {
   }
 }
 
-function getLocalDateKey() {
-  const now = new Date()
-  const year = now.getFullYear()
-  const month = String(now.getMonth() + 1).padStart(2, '0')
-  const day = String(now.getDate()).padStart(2, '0')
-  return `${year}-${month}-${day}`
-}
-
-function getDailyLimitStorageKey() {
-  if (typeof window === 'undefined') return ''
-  return `lead-submit-count:${getLocalDateKey()}`
-}
-
-function getDailySubmitCount() {
-  if (typeof window === 'undefined') return 0
-  try {
-    const key = getDailyLimitStorageKey()
-    if (!key) return 0
-    const raw = window.localStorage.getItem(key)
-    const parsed = Number(raw)
-    return Number.isFinite(parsed) && parsed > 0 ? parsed : 0
-  } catch {
-    return 0
-  }
-}
-
-function incrementDailySubmitCount() {
-  if (typeof window === 'undefined') return
-  try {
-    const key = getDailyLimitStorageKey()
-    if (!key) return
-    const nextCount = getDailySubmitCount() + 1
-    window.localStorage.setItem(key, String(nextCount))
-  } catch {
-    // Si localStorage no está disponible, no bloqueamos el envío.
-  }
-}
-
 export function useLeadFormSubmit({ endpoint = LEAD_WEBHOOK_URL, mode = 'lead' } = {}) {
   const [status, setStatus] = useState('idle')
   const [errorMessage, setErrorMessage] = useState('')
@@ -87,12 +47,6 @@ export function useLeadFormSubmit({ endpoint = LEAD_WEBHOOK_URL, mode = 'lead' }
 
   const submitForm = useCallback(async (form) => {
     if (!(form instanceof HTMLFormElement)) return
-    const dailySubmitCount = getDailySubmitCount()
-    if (dailySubmitCount >= DAILY_SUBMIT_LIMIT) {
-      setStatus('error')
-      setErrorMessage('Has alcanzado el límite diario de envíos. Inténtalo de nuevo mañana.')
-      return
-    }
 
     setStatus('loading')
     setErrorMessage('')
@@ -147,7 +101,6 @@ export function useLeadFormSubmit({ endpoint = LEAD_WEBHOOK_URL, mode = 'lead' }
         throw new Error(backendMessage || `El servidor respondió ${res.status}. Inténtelo de nuevo más tarde.`)
       }
 
-      incrementDailySubmitCount()
       if (mode === 'callback' && backendMessage) {
         setSuccessMessage(backendMessage)
       }
