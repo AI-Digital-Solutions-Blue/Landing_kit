@@ -61,13 +61,6 @@ export function ContactFormModal() {
       </header>
 
       <div className="contact-modal__content">
-        <a className="contact-modal__option" href="tel:+34828151082">
-          <div>
-            <p className="contact-modal__option-title">Llámanos al 828 151 082</p>
-            <p className="contact-modal__option-subtitle">Nuestro equipo te ayudará.</p>
-          </div>
-        </a>
-
         <form
           id="lead_kit_canarias_form"
           name="lead_kit_canarias_form"
@@ -96,7 +89,9 @@ export function ContactFormModal() {
           onInput={handleValidateOnEdit}
           onChange={handleValidateOnEdit}
         >
-          <p className="contact-modal__callback-title">Nosotros te llamamos</p>
+          <div className="contact-modal__callback-head">
+            <p className="contact-modal__callback-title">Nosotros te llamamos</p>
+          </div>
           {status === 'success' ? (
             <p className="contact-modal__success" role="status" aria-live="polite">
               {successMessage || 'Perfecto, hemos recibido tus datos y te llamamos en breve.'}
