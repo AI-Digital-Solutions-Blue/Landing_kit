@@ -4,10 +4,17 @@ const ContactModalContext = createContext(null)
 
 export function ContactModalProvider({ children }) {
   const [isOpen, setIsOpen] = useState(false)
+  const [isLeadOpen, setIsLeadOpen] = useState(false)
+
   const openModal = useCallback(() => setIsOpen(true), [])
   const closeModal = useCallback(() => setIsOpen(false), [])
+  const openLeadModal = useCallback(() => setIsLeadOpen(true), [])
+  const closeLeadModal = useCallback(() => setIsLeadOpen(false), [])
 
-  const value = useMemo(() => ({ isOpen, openModal, closeModal }), [isOpen, openModal, closeModal])
+  const value = useMemo(
+    () => ({ isOpen, openModal, closeModal, isLeadOpen, openLeadModal, closeLeadModal }),
+    [isOpen, openModal, closeModal, isLeadOpen, openLeadModal, closeLeadModal],
+  )
 
   return <ContactModalContext.Provider value={value}>{children}</ContactModalContext.Provider>
 }

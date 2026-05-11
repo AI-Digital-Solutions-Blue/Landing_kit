@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './KitCtaFormSection.css'
 import { useLeadFormSubmit } from '../../hooks/useLeadFormSubmit'
-import { CtaOpenModalLink } from './CtaOpenModalLink'
+import { CtaOpenLeadModalLink } from './CtaOpenLeadModalLink'
 import { KitCtaFormBody } from './KitCtaFormBody'
 import { KitCtaFormSuccess } from './KitCtaFormSuccess'
 import { focusFirstInvalidField, validateLeadForm } from './leadFormValidation'
@@ -50,7 +50,7 @@ export function KitCtaFormSection() {
             aporte <strong>valor real a tu negocio.</strong>
           </p>
           <div className="kit-cta__actions">
-            <CtaOpenModalLink className="kit-cta__btn kit-cta__btn--primary">Quiero aprovechar mi bono</CtaOpenModalLink>
+            <CtaOpenLeadModalLink className="kit-cta__btn kit-cta__btn--primary">Quiero aprovechar mi bono</CtaOpenLeadModalLink>
             <a className="kit-cta__btn kit-cta__btn--ghost" href="tel:+34828151082">
               Hablar con un asesor
             </a>

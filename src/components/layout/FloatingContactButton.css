@@ -1,11 +1,17 @@
 .floating-contact {
+  display: none;
   position: fixed;
   right: clamp(12px, 2.2vw, 30px);
   bottom: clamp(16px, 3vh, 28px);
-  z-index: 950;
-  display: inline-flex;
+  z-index: 960;
   align-items: center;
   gap: 8px;
+}
+
+@media (max-width: 640px) {
+  .floating-contact {
+    display: inline-flex;
+  }
 }
 
 .floating-contact__pill,

@@ -1,5 +1,5 @@
 import './FeaturesSection.css'
-import { CtaOpenModalLink } from './CtaOpenModalLink'
+import { CtaOpenLeadModalLink } from './CtaOpenLeadModalLink'
 
 const img = (name) => `/imagenes/${encodeURIComponent(name)}`
 
@@ -67,7 +67,7 @@ export function FeaturesSection() {
       </div>
 
       <div className="features__actions">
-        <CtaOpenModalLink className="features__btn">Quiero activar mi bono</CtaOpenModalLink>
+        <CtaOpenLeadModalLink className="features__btn">Quiero activar mi bono</CtaOpenLeadModalLink>
       </div>
     </section>
   )

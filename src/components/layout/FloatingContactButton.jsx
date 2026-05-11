@@ -7,7 +7,7 @@ const ROTATION_INTERVAL_MS = 3000
 const FADE_DURATION_MS = 220
 
 export function FloatingContactButton() {
-  const { openModal } = useContactModal()
+  const { openModal, isOpen } = useContactModal()
   const [messageIndex, setMessageIndex] = useState(0)
   const [isTextVisible, setIsTextVisible] = useState(true)
 
@@ -30,6 +30,8 @@ export function FloatingContactButton() {
   const handleOpenModal = () => {
     openModal()
   }
+
+  if (isOpen) return null
 
   return (
     <div className="floating-contact" aria-label="Abrir opciones de contacto">

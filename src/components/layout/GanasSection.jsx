@@ -1,5 +1,5 @@
 import './GanasSection.css'
-import { CtaOpenModalLink } from './CtaOpenModalLink'
+import { CtaOpenLeadModalLink } from './CtaOpenLeadModalLink'
 
 const img = (name) => `/imagenes/${encodeURIComponent(name)}`
 const svg = (name) => `/svg/${encodeURIComponent(name)}`
@@ -58,7 +58,7 @@ export function GanasSection() {
             Un bono que ya tienes aprobado, <strong>cero euros de desembolso</strong> y cuatro problemas resueltos de
             golpe.
           </p>
-          <CtaOpenModalLink className="ganas__btn">Quiero activar mi bono</CtaOpenModalLink>
+          <CtaOpenLeadModalLink className="ganas__btn">Quiero activar mi bono</CtaOpenLeadModalLink>
         </header>
 
         <div className="ganas__cards">

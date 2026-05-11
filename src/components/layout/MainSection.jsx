@@ -1,5 +1,5 @@
 import './MainSection.css'
-import { CtaOpenModalLink } from './CtaOpenModalLink'
+import { CtaOpenLeadModalLink } from './CtaOpenLeadModalLink'
 import { getSiteVariant } from '../../utils/siteVariant'
 
 const heroImageSrc = `/imagenes/${encodeURIComponent('PC 1 1.png')}`
@@ -119,8 +119,8 @@ export function MainSection() {
             ) : null}
 
             <div className="hero__actions">
-              <CtaOpenModalLink className="hero__btn hero__btn--outline">Activar mi bono</CtaOpenModalLink>
-              <CtaOpenModalLink className="hero__btn hero__btn--solid">¿Cómo funciona?</CtaOpenModalLink>
+              <CtaOpenLeadModalLink className="hero__btn hero__btn--outline">Activar mi bono</CtaOpenLeadModalLink>
+              <CtaOpenLeadModalLink className="hero__btn hero__btn--solid">¿Cómo funciona?</CtaOpenLeadModalLink>
             </div>
 
             <ul className="hero__list">
