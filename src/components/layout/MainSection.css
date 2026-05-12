@@ -68,7 +68,7 @@
   padding: 0;
   border-radius: 999px;
   overflow: hidden;
-  background: linear-gradient(90deg, #3498db 0%, #2d9cdb 22%, #1565a8 48%, #0f172a 72%, #000000 100%);
+  background: #000000;
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
 }
 
