@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# PoC y materiales internos
+vendor/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

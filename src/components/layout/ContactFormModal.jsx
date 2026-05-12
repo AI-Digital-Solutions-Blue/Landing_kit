@@ -12,7 +12,7 @@ function isValidPhone(value) {
 
 export function ContactFormModal() {
   const { isOpen, closeModal } = useContactModal()
-  const { status, errorMessage, successMessage, submitForm } = useLeadFormSubmit({
+  const { status, successMessage, submitForm } = useLeadFormSubmit({
     endpoint: CALLBACK_REQUEST_URL,
     mode: 'callback',
   })
@@ -29,10 +29,8 @@ export function ContactFormModal() {
     const form = e.currentTarget
     markFormStarted(form)
     if (!hasSubmittedOnce) return
-    const nombre = String(form.elements.namedItem('nombre')?.value ?? '').trim()
     const telefono = String(form.elements.namedItem('telefono')?.value ?? '').trim()
     const nextErrors = {}
-    if (!nombre) nextErrors.nombre = 'Introduce tu nombre.'
     if (!telefono) nextErrors.telefono = 'Introduce tu número de teléfono.'
     else if (!isValidPhone(telefono)) nextErrors.telefono = 'Introduce un teléfono válido.'
     setFieldErrors(nextErrors)
@@ -69,18 +67,15 @@ export function ContactFormModal() {
             e.preventDefault()
             const form = e.currentTarget
             markFormStarted(form)
-            const nombre = String(form.elements.namedItem('nombre')?.value ?? '').trim()
             const telefono = String(form.elements.namedItem('telefono')?.value ?? '').trim()
             const errors = {}
-            if (!nombre) errors.nombre = 'Introduce tu nombre.'
             if (!telefono) errors.telefono = 'Introduce tu número de teléfono.'
             else if (!isValidPhone(telefono)) errors.telefono = 'Introduce un teléfono válido.'
 
             setHasSubmittedOnce(true)
             setFieldErrors(errors)
             if (Object.keys(errors).length > 0) {
-              if (errors.nombre) form.elements.namedItem('nombre')?.focus?.()
-              else form.elements.namedItem('telefono')?.focus?.()
+              if (errors.telefono) form.elements.namedItem('telefono')?.focus?.()
               return
             }
             submitForm(form)
@@ -92,32 +87,26 @@ export function ContactFormModal() {
           <div className="contact-modal__callback-head">
             <p className="contact-modal__callback-title">Nosotros te llamamos</p>
           </div>
-          {status === 'success' ? (
+          {status === 'success' || status === 'error' ? (
             <p className="contact-modal__success" role="status" aria-live="polite">
-              {successMessage || 'Perfecto, hemos recibido tus datos y te llamamos en breve.'}
+              {status === 'success' && successMessage
+                ? successMessage
+                : 'Perfecto, hemos recibido tus datos y te llamamos en breve.'}
             </p>
           ) : (
             <>
-              {status === 'error' && errorMessage ? (
-                <p className="contact-modal__error" role="alert">
-                  {errorMessage}
-                </p>
-              ) : null}
-
               <label className="contact-modal__sr-only" htmlFor="contact-modal-nombre">
                 Tu nombre
               </label>
               <input
                 id="contact-modal-nombre"
-                className={`contact-modal__input${fieldErrors.nombre ? ' contact-modal__input--invalid' : ''}`}
+                className="contact-modal__input"
                 type="text"
                 name="nombre"
                 placeholder="Tu nombre"
                 autoComplete="name"
-                aria-invalid={Boolean(fieldErrors.nombre)}
                 disabled={status === 'loading'}
               />
-              {fieldErrors.nombre ? <p className="contact-modal__field-error">{fieldErrors.nombre}</p> : null}
 
               <label className="contact-modal__sr-only" htmlFor="contact-modal-telefono">
                 Tu número de teléfono
@@ -129,15 +118,11 @@ export function ContactFormModal() {
                 name="telefono"
                 placeholder="Tu número de teléfono"
                 autoComplete="tel"
+                inputMode="tel"
                 aria-invalid={Boolean(fieldErrors.telefono)}
                 disabled={status === 'loading'}
               />
               {fieldErrors.telefono ? <p className="contact-modal__field-error">{fieldErrors.telefono}</p> : null}
-
-              <input type="hidden" name="empresa" value="No especificado (modal rápido)" />
-              <input type="hidden" name="email" value="sin-email@siweb.es" />
-              <input type="hidden" name="kit_concedido" value="no-se" />
-              <input type="hidden" name="solucion" value="callback-rapido" />
 
               <button className="contact-modal__submit" type="submit" disabled={status === 'loading'}>
                 <span className="contact-modal__submit-text">

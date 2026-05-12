@@ -7,16 +7,25 @@ import { perDayLimiter, perMinuteLimiter } from './middlewares/rateLimit.js'
 import { errorHandler, notFoundHandler } from './middlewares/errorHandler.js'
 import healthRouter from './routes/health.js'
 import elegibilidadRouter from './routes/elegibilidad.js'
+import clickToCallRouter from './routes/clickToCall.js'
 
 const app = express()
 
 app.disable('x-powered-by')
 app.set('trust proxy', 1)
 
+const allowedOrigins = config.LANDING_ORIGIN.split(',')
+  .map((o) => o.trim())
+  .filter(Boolean)
+
 app.use(helmet())
 app.use(
   cors({
-    origin: config.LANDING_ORIGIN,
+    origin(origin, callback) {
+      if (!origin) return callback(null, true)
+      if (allowedOrigins.includes(origin)) return callback(null, true)
+      return callback(new Error('Not allowed by CORS'))
+    },
     methods: ['GET', 'POST'],
     maxAge: 600,
   }),
@@ -25,6 +34,7 @@ app.use(express.json({ limit: '20kb' }))
 
 app.use('/health', healthRouter)
 app.use('/elegibilidad', perMinuteLimiter, perDayLimiter, elegibilidadRouter)
+app.use('/click-to-call', perMinuteLimiter, perDayLimiter, clickToCallRouter)
 
 app.use(notFoundHandler)
 app.use(errorHandler)

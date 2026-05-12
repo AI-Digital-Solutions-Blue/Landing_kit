@@ -57,12 +57,12 @@ export function useLeadFormSubmit({ endpoint = LEAD_WEBHOOK_URL, mode = 'lead' }
       const formData = new FormData(form)
       const name = String(formData.get('nombre') ?? '').trim()
       const phone = normalizePhone(formData.get('telefono'))
-      if (!name || !phone) {
+      if (!phone) {
         setStatus('error')
-        setErrorMessage('Faltan datos requeridos para enviar la solicitud.')
+        setErrorMessage('Introduce tu número de teléfono.')
         return
       }
-      payload = { name, phone }
+      payload = { phone, name: name || null, consent: true }
     } else {
       const data = Object.fromEntries(new FormData(form).entries())
       const [publicIp, clientMeta] = await Promise.all([getPublicIp(), Promise.resolve(getClientMetadata(form))])
@@ -85,20 +85,32 @@ export function useLeadFormSubmit({ endpoint = LEAD_WEBHOOK_URL, mode = 'lead' }
         body: JSON.stringify(payload),
       })
 
-      let backendMessage = ''
-      if (mode === 'callback') {
-        const contentType = res.headers.get('content-type') || ''
-        if (contentType.includes('application/json')) {
-          const body = await res.json().catch(() => null)
-          backendMessage = typeof body?.message === 'string' ? body.message.trim() : ''
-        } else {
-          const text = await res.text().catch(() => '')
-          backendMessage = String(text || '').trim()
-        }
+      let body = null
+      const contentType = res.headers.get('content-type') || ''
+      if (contentType.includes('application/json')) {
+        body = await res.json().catch(() => null)
+      } else {
+        const text = await res.text().catch(() => '')
+        body = text ? { message: text } : null
       }
 
-      if (res.status !== 200) {
-        throw new Error(backendMessage || `El servidor respondió ${res.status}. Inténtelo de nuevo más tarde.`)
+      const backendMessage = typeof body?.message === 'string' ? body.message.trim() : ''
+
+      if (!res.ok || (mode === 'callback' && body?.ok === false)) {
+        const fallbackByCode = {
+          invalid_phone: 'El número de teléfono no es válido.',
+          consent_required: 'Debes aceptar el consentimiento para que te llamemos.',
+          rate_limited: 'Demasiados intentos. Vuelve a intentarlo en unos minutos.',
+          agent_unavailable: 'Nuestros agentes no están disponibles ahora. Inténtalo en unos minutos.',
+          voip_error: 'Servicio temporalmente no disponible. Inténtalo en unos minutos.',
+          config_error: 'Error de configuración del servicio. Inténtalo más tarde.',
+        }
+        const code = typeof body?.code === 'string' ? body.code : ''
+        const message =
+          backendMessage ||
+          fallbackByCode[code] ||
+          `El servidor respondió ${res.status}. Inténtelo de nuevo más tarde.`
+        throw new Error(message)
       }
 
       if (mode === 'callback' && backendMessage) {
