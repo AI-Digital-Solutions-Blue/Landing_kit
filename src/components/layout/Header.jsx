@@ -25,7 +25,7 @@ export function Header() {
               openEligibilityModal()
             }}
           >
-            Quiero mi bono
+            Comprobar mi bono
           </a>
         </div>
       </div>
