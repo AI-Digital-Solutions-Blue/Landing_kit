@@ -54,6 +54,14 @@ const schema = z
       .transform((value) => (value === '' ? undefined : value)),
     VOIP_QUEUE_MAX_ATTEMPTS: z.coerce.number().int().positive().default(3),
     BUSINESS_TIMEZONE: z.string().trim().default('Europe/Madrid'),
+    XILON_API_URL: z.string().url(),
+    XILON_AUTH_TOKEN: z
+      .string()
+      .trim()
+      .min(8, 'XILON_AUTH_TOKEN es obligatorio y debe tener al menos 8 caracteres'),
+    XILON_DEFAULT_GROUP: z.string().trim().min(1, 'XILON_DEFAULT_GROUP es obligatorio'),
+    XILON_DEFAULT_USER: z.string().trim().min(1, 'XILON_DEFAULT_USER es obligatorio'),
+    XILON_TIMEOUT_MS: z.coerce.number().int().positive().default(15000),
   })
   .superRefine((value, ctx) => {
     const hasAnyQueue =

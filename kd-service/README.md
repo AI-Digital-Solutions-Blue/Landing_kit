@@ -1,3 +1,7 @@
+# iniciar servicio (desarrollo local)
+source .venv/Scripts/activate
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8001 --reload
+
 # kd-service
 
 Microservicio **FastAPI** que expone por HTTP el PoC `kd_contract_parser`
@@ -15,6 +19,12 @@ Navegador  ─────►  Nginx :443  ─────►  Node Express :300
                                               │  loopback + X-API-Key
                                               ▼
                                        FastAPI :8001 (este servicio)
+                                              │ ▲
+                                              │ │ GET /cookies + X-Admin-Key
+                                              │ │
+                                              │ │  session_keeper :8080
+                                              │ │  (mantiene login con .p12
+                                              │ │   y refresca cookies)
                                               │
                                               │  HTTPS + cookies DWR
                                               ▼
@@ -23,28 +33,43 @@ Navegador  ─────►  Nginx :443  ─────►  Node Express :300
 
 ## Endpoints
 
-| Método | Ruta                       | Auth        | Descripción                                              |
-| ------ | -------------------------- | ----------- | -------------------------------------------------------- |
-| GET    | `/health`                  | —           | Healthcheck. Devuelve `session_loaded: bool`.            |
-| POST   | `/elegibilidad`            | `X-API-Key` | Consulta elegibilidad para `(nif, bono, categoria)`.     |
-| POST   | `/admin/reload-session`    | `X-API-Key` | Releera `cookies.json` tras una expiración de sesión.    |
+| Método | Ruta                            | Auth        | Descripción                                                  |
+| ------ | ------------------------------- | ----------- | ------------------------------------------------------------ |
+| GET    | `/health`                       | —           | Healthcheck con info de sesión y del keeper.                 |
+| POST   | `/elegibilidad`                 | `X-API-Key` | Consulta elegibilidad para `(nif, bono, categoria)`.         |
+| POST   | `/admin/refresh-from-keeper`    | `X-API-Key` | Pide cookies frescas al `session_keeper`.                    |
+| POST   | `/admin/reload-session`         | `X-API-Key` | Releera `cookies.json` (fallback / break-glass).             |
 
-## Estado de la sesión DWR (Fase 1)
+## Fuentes de la sesión DWR
 
-El portal de Red.es exige login con certificado digital `.p12`. **Esta
-versión NO automatiza el login todavía.** En su lugar:
+El portal de Red.es exige login con certificado digital `.p12`. Este
+servicio **no** loguea con el `.p12` directamente; lo delega en el
+`session_keeper`. Hay dos fuentes posibles, en orden de preferencia:
 
-1. Un operador humano se loguea en Chrome con el certificado del digitalizador.
-2. Extrae 5 valores de DevTools (ver siguiente sección) y los pega en
-   `kd-service/cookies.json`.
-3. Arranca/recarga el servicio. Mientras la sesión siga viva (varias
-   horas típicamente), `/elegibilidad` responde.
-4. Cuando el portal devuelve "Se ha perdido la sesión", el servicio marca
-   la sesión como expirada y devuelve `503 session_expired`. El operador
-   regenera el JSON y llama a `POST /admin/reload-session`.
+### 1. session_keeper (preferido)
 
-La **Fase 2** sustituirá esto por un módulo `auth.py` con Playwright que
-loguee con el `.p12` automáticamente y refresque cookies en background.
+Servicio externo que mantiene un login activo con el `.p12`, hace pings
+periódicos al portal y refresca cookies si caducan. Expone un endpoint
+`GET /cookies` con cabecera `X-Admin-Key` que devuelve las 5 claves DWR
+en el mismo formato que `cookies.json`.
+
+Cuando `SESSION_KEEPER_URL` está definido en `.env`, `kd-service` le
+pide cookies al arrancar y cada vez que el portal devuelve
+`SessionExpired` (refresh en background tras un 503). También refresca
+proactivamente cuando las cookies cacheadas superan
+`SESSION_KEEPER_MAX_AGE_S` segundos.
+
+### 2. cookies.json (fallback / break-glass)
+
+Si el keeper no está configurado o no responde, se usa el fichero local
+`cookies.json` generado a mano. Para regenerarlo cuando hace falta:
+
+1. Loguearse en Chrome con el certificado en
+   `https://portal.gestion.sedepkd.red.gob.es/adacuerdos/`.
+2. Entrar a "Iniciar nuevo acuerdo" para que carguen los DWR.
+3. Sacar de DevTools las 5 piezas (ver siguiente sección) y pegarlas en
+   `cookies.json`.
+4. `curl -X POST http://127.0.0.1:8001/admin/reload-session -H "X-API-Key: ..."`.
 
 ### Cómo generar `cookies.json`
 
@@ -142,14 +167,18 @@ curl -X POST http://127.0.0.1:8001/admin/reload-session \
 
 ## Variables de entorno
 
-| Variable        | Default              | Descripción                                                   |
-| --------------- | -------------------- | ------------------------------------------------------------- |
-| `PORT`          | `8001`               | Puerto loopback. Debe coincidir con `KD_BASE_URL` del Node.   |
-| `ENV`           | `production`         | `development` o `production`.                                 |
-| `LOG_LEVEL`     | `info`               | `debug | info | warning | error`.                             |
-| `API_KEY`       | (vacío, obligatorio) | Compartida con el Node. Generar con `openssl rand -hex 32`.   |
-| `COOKIES_PATH`  | `./cookies.json`     | Ruta al fichero de cookies DWR.                               |
-| `CORS_ORIGINS`  | (vacío)              | Solo si necesitas pegarle desde el navegador en debug.        |
+| Variable                   | Default              | Descripción                                                                  |
+| -------------------------- | -------------------- | ---------------------------------------------------------------------------- |
+| `PORT`                     | `8001`               | Puerto loopback. Debe coincidir con `KD_BASE_URL` del Node.                  |
+| `ENV`                      | `production`         | `development` o `production`.                                                |
+| `LOG_LEVEL`                | `info`               | `debug | info | warning | error`.                                            |
+| `API_KEY`                  | (vacío, obligatorio) | Compartida con el Node. Generar con `openssl rand -hex 32`.                  |
+| `COOKIES_PATH`             | `./cookies.json`     | Ruta al fichero de cookies DWR (fallback del keeper).                        |
+| `SESSION_KEEPER_URL`       | (vacío)              | URL del session_keeper, ej. `http://127.0.0.1:8080`. Vacío = desactivado.    |
+| `ADMIN_API_KEY`            | (vacío)              | Token `X-Admin-Key` del keeper.                                              |
+| `SESSION_KEEPER_TIMEOUT_S` | `10`                 | Timeout en segundos al hablar con el keeper.                                 |
+| `SESSION_KEEPER_MAX_AGE_S` | `600`                | Edad máx. de cookies cacheadas antes de refrescar proactivamente. `0` = off. |
+| `CORS_ORIGINS`             | (vacío)              | Solo si necesitas pegarle desde el navegador en debug.                       |
 
 ## Seguridad
 

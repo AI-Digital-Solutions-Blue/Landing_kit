@@ -18,3 +18,6 @@ export const CALLBACK_REQUEST_URL = `${API_BASE}/click-to-call`
 
 /** Endpoint backend para consulta de elegibilidad (kd_contract_parser) */
 export const ELIGIBILIDAD_URL = `${API_BASE}/elegibilidad`
+
+/** Endpoint backend para activar el bono Kit Digital (proxy a Xilon) */
+export const AUTHORIZATION_URL = `${API_BASE}/authorization`

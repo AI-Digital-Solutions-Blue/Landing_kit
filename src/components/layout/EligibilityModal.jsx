@@ -2,7 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useContactModal } from '../../context/ContactModalContext'
 import { useEligibilityCheck } from '../../hooks/useEligibilityCheck'
+import { useXilonAuthorization } from '../../hooks/useXilonAuthorization'
 import { ELIGIBILITY_CATEGORIAS, getLabelByCodigo } from '../../utils/categoriaCatalog'
+import { EligibilityActivateForm } from './EligibilityActivateForm'
 import './LeadFormModal.css'
 import './EligibilityModal.css'
 
@@ -39,21 +41,50 @@ function formatEuro(value) {
   }
 }
 
+function getFriendlyName(razonSocial) {
+  if (!razonSocial || typeof razonSocial !== 'string') return ''
+  const first = razonSocial.trim().split(/\s+/)[0]
+  if (!first) return ''
+  if (first.length <= 4 && first === first.toUpperCase()) return first
+  return first.charAt(0).toUpperCase() + first.slice(1).toLowerCase()
+}
+
 export function EligibilityModal() {
-  const { isEligibilityOpen, closeEligibilityModal, openLeadModal } = useContactModal()
+  const { isEligibilityOpen, closeEligibilityModal } = useContactModal()
   const { status, result, errorMessage, check, reset } = useEligibilityCheck()
+  const {
+    status: activationStatus,
+    errorMessage: activationError,
+    submit: submitActivation,
+    reset: resetActivation,
+  } = useXilonAuthorization()
   const [fieldErrors, setFieldErrors] = useState({})
   const [hasSubmittedOnce, setHasSubmittedOnce] = useState(false)
+  const [view, setView] = useState('form') // 'form' | 'result' | 'activate' | 'activated'
+  const [lastNif, setLastNif] = useState('')
   const panelRef = useRef(null)
   const previouslyFocused = useRef(null)
 
   useEffect(() => {
     if (!isEligibilityOpen) {
       reset()
+      resetActivation()
       setFieldErrors({})
       setHasSubmittedOnce(false)
+      setView('form')
+      setLastNif('')
     }
-  }, [isEligibilityOpen, reset])
+  }, [isEligibilityOpen, reset, resetActivation])
+
+  useEffect(() => {
+    if (status === 'success') setView('result')
+    if (status === 'error') setView('form')
+    if (status === 'idle') setView('form')
+  }, [status])
+
+  useEffect(() => {
+    if (activationStatus === 'success') setView('activated')
+  }, [activationStatus])
 
   useEffect(() => {
     if (!isEligibilityOpen) return
@@ -100,6 +131,7 @@ export function EligibilityModal() {
       e.currentTarget.elements.namedItem(first)?.focus?.()
       return
     }
+    setLastNif(values.nif)
     check(values)
   }
 
@@ -119,9 +151,37 @@ export function EligibilityModal() {
   }
 
   const handleActivar = () => {
-    closeEligibilityModal()
-    openLeadModal()
+    resetActivation()
+    setView('activate')
   }
+
+  const handleActivationSubmit = (payload) => {
+    submitActivation(payload)
+  }
+
+  const handleBackFromActivate = () => {
+    setView('result')
+  }
+
+  const renderActivated = () => (
+    <div className="eligibility-modal__result eligibility-modal__result--ok">
+      <div className="eligibility-modal__result-icon" aria-hidden="true">
+        ✓
+      </div>
+      <h2 className="eligibility-modal__result-title">Solicitud enviada</h2>
+      <p className="eligibility-modal__result-lead">
+        Hemos recibido tu solicitud. Te contactaremos en breve para terminar la activación de tu
+        bono Kit Digital.
+      </p>
+      <button
+        type="button"
+        className="eligibility-modal__submit"
+        onClick={closeEligibilityModal}
+      >
+        <span className="eligibility-modal__submit-label">Cerrar</span>
+      </button>
+    </div>
+  )
 
   const renderForm = () => (
     <form
@@ -169,7 +229,18 @@ export function EligibilityModal() {
         </label>
 
         <label className="eligibility-modal__field">
-          <span className="eligibility-modal__label">Código de bono</span>
+          <span className="eligibility-modal__label eligibility-modal__label--with-help">
+            <span>Código de bono</span>
+            <a
+              className="eligibility-modal__help-link"
+              href="/donde-encontrar-codigo-bono.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+            >
+              ¿Cómo localizarlo?
+            </a>
+          </span>
           <input
             className={`eligibility-modal__input${
               fieldErrors.bono ? ' eligibility-modal__input--invalid' : ''
@@ -256,13 +327,17 @@ export function EligibilityModal() {
       (a) => a.slot_libre && a.importe_disponible > 0,
     )
 
+    const friendlyNameOk = getFriendlyName(details.razon_social)
+
     if (eligible) {
       return (
         <div className="eligibility-modal__result eligibility-modal__result--ok">
           <div className="eligibility-modal__result-icon" aria-hidden="true">
             ✓
           </div>
-          <h2 className="eligibility-modal__result-title">¡Tu bono está disponible!</h2>
+          <h2 className="eligibility-modal__result-title">
+            {friendlyNameOk ? `¡Enhorabuena, ${friendlyNameOk}!` : '¡Tu bono está disponible!'}
+          </h2>
           <p className="eligibility-modal__result-lead">
             Puedes activar <strong>{catLabel}</strong> con tu bono Kit Digital.
           </p>
@@ -293,15 +368,21 @@ export function EligibilityModal() {
       )
     }
 
+    const friendlyName = getFriendlyName(details.razon_social)
+    const fallbackMessage = 'No podemos activar esta categoría con tu bono.'
+
     return (
       <div className="eligibility-modal__result eligibility-modal__result--ko">
         <div className="eligibility-modal__result-icon eligibility-modal__result-icon--ko" aria-hidden="true">
           !
         </div>
-        <h2 className="eligibility-modal__result-title">Esta solución no está disponible</h2>
-        <p className="eligibility-modal__result-lead">
-          {message || 'No podemos activar esta categoría con tu bono.'}
-        </p>
+        <h2 className="eligibility-modal__result-title">
+          {friendlyName ? `Hola, ${friendlyName}` : 'Esta solución no está disponible'}
+        </h2>
+        {friendlyName ? (
+          <p className="eligibility-modal__result-subtitle">Esta solución no está disponible.</p>
+        ) : null}
+        <p className="eligibility-modal__result-lead">{message || fallbackMessage}</p>
 
         {elegiblesAlternativas.length > 0 ? (
           <>
@@ -391,7 +472,24 @@ export function EligibilityModal() {
         </button>
 
         <div className="eligibility-modal__body">
-          {status === 'success' ? renderResult() : status === 'error' ? renderError() : renderForm()}
+          {view === 'activated' ? (
+            renderActivated()
+          ) : view === 'activate' ? (
+            <EligibilityActivateForm
+              details={result?.details ?? {}}
+              baseTaxId={lastNif}
+              status={activationStatus}
+              errorMessage={activationError}
+              onSubmit={handleActivationSubmit}
+              onBack={handleBackFromActivate}
+            />
+          ) : status === 'success' ? (
+            renderResult()
+          ) : status === 'error' ? (
+            renderError()
+          ) : (
+            renderForm()
+          )}
         </div>
       </div>
     </div>,

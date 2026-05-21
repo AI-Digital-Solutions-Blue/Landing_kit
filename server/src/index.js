@@ -8,6 +8,7 @@ import { errorHandler, notFoundHandler } from './middlewares/errorHandler.js'
 import healthRouter from './routes/health.js'
 import elegibilidadRouter from './routes/elegibilidad.js'
 import clickToCallRouter from './routes/clickToCall.js'
+import authorizationRouter from './routes/authorization.js'
 
 const app = express()
 
@@ -35,6 +36,7 @@ app.use(express.json({ limit: '20kb' }))
 app.use('/health', healthRouter)
 app.use('/elegibilidad', perMinuteLimiter, perDayLimiter, elegibilidadRouter)
 app.use('/click-to-call', perMinuteLimiter, perDayLimiter, clickToCallRouter)
+app.use('/authorization', perMinuteLimiter, perDayLimiter, authorizationRouter)
 
 app.use(notFoundHandler)
 app.use(errorHandler)

@@ -31,6 +31,17 @@ class Settings(BaseSettings):
 
     COOKIES_PATH: Path = Path("./cookies.json")
 
+    # --- session_keeper (fuente preferida de cookies DWR) -----------------
+    # Si SESSION_KEEPER_URL esta definido, al arrancar y al expirar la
+    # sesion intentamos obtener cookies frescas desde el keeper. El
+    # cookies.json sigue siendo fallback / break-glass.
+    SESSION_KEEPER_URL: str = ""
+    ADMIN_API_KEY: str = ""
+    SESSION_KEEPER_TIMEOUT_S: float = 10.0
+    # Edad maxima de las cookies en memoria antes de re-pedirlas al keeper
+    # de forma proactiva (segundos). 0 = nunca (solo bajo demanda).
+    SESSION_KEEPER_MAX_AGE_S: int = 600
+
     # Solo relevante si se quiere debugar pegandole desde el navegador.
     # En produccion vacio: el unico cliente legitimo es el Node por loopback.
     CORS_ORIGINS: str = ""
@@ -42,9 +53,19 @@ class Settings(BaseSettings):
             raise ValueError("API_KEY no puede estar vacia ni ser un placeholder")
         return v.strip()
 
+    @field_validator("SESSION_KEEPER_URL", "ADMIN_API_KEY")
+    @classmethod
+    def _strip_keeper(cls, v: str) -> str:
+        # Saneamos espacios accidentales en .env (ej: "ADMIN_API_KEY= foo").
+        return v.strip() if isinstance(v, str) else v
+
     @property
     def cors_origins_list(self) -> list[str]:
         return [o.strip() for o in self.CORS_ORIGINS.split(",") if o.strip()]
+
+    @property
+    def keeper_enabled(self) -> bool:
+        return bool(self.SESSION_KEEPER_URL and self.ADMIN_API_KEY)
 
 
 def get_settings() -> Settings:
