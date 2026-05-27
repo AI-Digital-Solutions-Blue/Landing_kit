@@ -5,6 +5,13 @@
   margin-block: var(--section-block-py);
 }
 
+@media (max-width: 640px) {
+  .site-main > section.porque-siweb {
+    margin-top: 8px;
+    margin-bottom: clamp(20px, 5vw, 32px);
+  }
+}
+
 .porque-siweb {
   --pq-accent: #2d9cdb;
   width: 100%;

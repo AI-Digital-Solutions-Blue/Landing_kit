@@ -37,12 +37,24 @@
   color: transparent;
 }
 
+.features__title-br-mobile {
+  display: none;
+}
+
 @media (max-width: 560px) {
   .features__title {
     white-space: normal;
     width: auto;
     max-width: 100%;
-    font-size: clamp(1.05rem, 4.5vw, 1.45rem);
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+    line-height: 1.18;
+    text-align: left;
+    margin-inline: 0;
+    font-weight: 500;
+  }
+
+  .features__title-br-mobile {
+    display: inline;
   }
 }
 
@@ -60,6 +72,79 @@
   }
 }
 
+@media (max-width: 640px) {
+  .features__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'stack';
+    gap: 0;
+    touch-action: pan-y;
+  }
+
+  .features__card {
+    grid-area: stack;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 0.45s ease,
+      transform 0.45s ease,
+      visibility 0s linear 0.45s;
+    transform: translateX(8px);
+  }
+
+  .features__card--active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(0);
+    transition:
+      opacity 0.45s ease,
+      transform 0.45s ease,
+      visibility 0s linear 0s;
+  }
+}
+
+.features__dots {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .features__dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 18px;
+  }
+}
+
+.features__dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: #c9ccd2;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.features__dot:hover {
+  background: #9ba0a8;
+}
+
+.features__dot--active {
+  background: #1f2937;
+  transform: scale(1.15);
+}
+
+.features__dot:focus-visible {
+  outline: 2px solid var(--hero-accent);
+  outline-offset: 3px;
+}
+
 .features__card {
   display: flex;
   flex-direction: column;
@@ -75,6 +160,16 @@
   font-weight: 600;
   line-height: 1.22;
   color: #0a0a0a;
+}
+
+@media (max-width: 560px) {
+  .features__card-title {
+    font-size: clamp(1.55rem, 6.5vw, 2rem);
+    line-height: 1.18;
+    min-height: 0;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
 }
 
 .features__media {
@@ -113,6 +208,12 @@
   display: flex;
   justify-content: center;
   margin-top: clamp(36px, 5vw, 52px);
+}
+
+@media (max-width: 640px) {
+  .features__actions {
+    display: none;
+  }
 }
 
 .features__btn {

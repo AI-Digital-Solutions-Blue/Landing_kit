@@ -73,6 +73,7 @@ body {
     calc(100vw * var(--landing-bg-h) / var(--landing-bg-w))
   );
   background: transparent;
+  overflow-x: clip;
 }
 
 p {

@@ -49,6 +49,14 @@
   gap: clamp(10px, 1.6vw, 22px);
 }
 
+@media (max-width: 640px) {
+  .promo-strip__copy--es {
+    padding-left: 0;
+    margin-inline: 0;
+    align-items: flex-start;
+  }
+}
+
 .promo-strip__paragraph--es-intro {
   font-size: clamp(1.72rem, 4.1vw, 2.45rem);
   font-weight: 300;

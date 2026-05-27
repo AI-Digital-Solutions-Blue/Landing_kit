@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import './StepsSection.css'
 
 const stepNumberSvgs = [
@@ -42,11 +43,42 @@ const steps = [
 ]
 
 export function StepsSection() {
+  const trackRef = useRef(null)
+  const itemRefs = useRef([])
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return undefined
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+        if (!visible) return
+        const idx = Number(visible.target.dataset.index)
+        if (!Number.isNaN(idx)) setActiveIndex(idx)
+      },
+      { root: track, threshold: [0.4, 0.6, 0.8] },
+    )
+
+    itemRefs.current.forEach((el) => el && observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
+  const progressPct = ((activeIndex + 1) / steps.length) * 100
+
   return (
     <section className="steps" aria-label="Cómo funciona">
-      <ol className="steps__list">
+      <ol className="steps__list" ref={trackRef}>
         {steps.map((step, index) => (
-          <li key={step.title} className="steps__item">
+          <li
+            key={step.title}
+            className="steps__item"
+            ref={(el) => (itemRefs.current[index] = el)}
+            data-index={index}
+          >
             <div className="steps__num" aria-hidden="true">
               <div className="steps__num-slot" data-step={index + 1}>
                 <img
@@ -67,6 +99,17 @@ export function StepsSection() {
           </li>
         ))}
       </ol>
+
+      <div
+        className="steps__progress"
+        role="progressbar"
+        aria-valuemin={1}
+        aria-valuemax={steps.length}
+        aria-valuenow={activeIndex + 1}
+        aria-label={`Paso ${activeIndex + 1} de ${steps.length}`}
+      >
+        <span className="steps__progress-fill" style={{ width: `${progressPct}%` }} />
+      </div>
     </section>
   )
 }

@@ -3,8 +3,7 @@ import { CtaOpenLeadModalLink } from './CtaOpenLeadModalLink'
 
 const svg = (filename) => `/svg/${encodeURIComponent(filename)}`
 
-/** Query fija para evitar caché del navegador/CDN con un `monitor.svg` antiguo */
-const monitorIconSrc = '/monitor.svg?v=2'
+const puestoTrabajoIconSrc = '/puesto-trabajo.svg'
 
 function solutionIconSrc(item) {
   if (item.iconSrc) return item.iconSrc
@@ -40,7 +39,7 @@ const solutions = [
   },
   {
     group: 6,
-    iconSrc: monitorIconSrc,
+    iconSrc: puestoTrabajoIconSrc,
     title: 'Puesto de trabajo seguro',
     body: 'Equipa tu actividad con una solución orientada a trabajar con más seguridad.',
   },
@@ -53,16 +52,12 @@ function SolutionsColumn({ items }) {
   return (
     <ul className="kit-solutions__col">
       {items.map((item) => {
-        const isMonitor = Boolean(item.iconSrc)
         const src = solutionIconSrc(item)
         return (
         <li key={item.title} className="kit-solutions__item">
-          <div
-            className={`kit-solutions__icon-wrap${isMonitor ? ' kit-solutions__icon-wrap--monitor' : ''}`}
-            aria-hidden="true"
-          >
+          <div className="kit-solutions__icon-wrap" aria-hidden="true">
             <img
-              className={`kit-solutions__icon${isMonitor ? ' kit-solutions__icon--monitor' : ''}`}
+              className="kit-solutions__icon"
               src={src}
               key={src}
               alt=""

@@ -2,7 +2,7 @@
   display: inline-flex;
   position: fixed;
   right: clamp(16px, 3vw, 40px);
-  top: clamp(120px, 14vh, 150px);
+  bottom: clamp(20px, 4vw, 32px);
   z-index: 960;
   align-items: center;
   justify-content: flex-end;
@@ -163,7 +163,7 @@
 @media (max-width: 640px) {
   .floating-contact {
     right: 12px;
-    top: 100px;
+    bottom: 16px;
   }
 
   .floating-contact__pill {

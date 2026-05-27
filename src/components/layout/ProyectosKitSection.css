@@ -51,10 +51,25 @@
 }
 
 @media (max-width: 640px) {
+  .proyectos-kit {
+    text-align: left;
+  }
+
   .proyectos-kit__title {
     white-space: normal;
     display: block;
     max-width: 100%;
-    font-size: clamp(1.2rem, 4.8vw, 1.65rem);
+    font-size: clamp(2rem, 9vw, 2.7rem);
+    font-weight: 400;
+    line-height: 1.18;
+    text-align: left;
+  }
+
+  .site-main > .proyectos-kit {
+    padding-bottom: 0;
+  }
+
+  .site-main > .porque-siweb {
+    padding-top: 12px;
   }
 }

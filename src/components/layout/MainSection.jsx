@@ -88,13 +88,16 @@ export function MainSection() {
                 </p>
               </div>
             ) : (
-              <p className="hero__lead">
-                Tienes un bono Kit Digital concedido que caduca en menos de 6
-                <br />
-                meses. Úsalo con Siweb Canarias y <strong>llévate un portátil de regalo</strong>
-                <br />
-                sin IVA, sin costes ocultos.
-              </p>
+              <>
+                <p className="hero__lead">
+                  Tienes un bono Kit Digital concedido que caduca en menos de 6
+                  <br />
+                  meses. Úsalo con Siweb Canarias y <strong>llévate un portátil de regalo</strong>
+                  <br />
+                  sin IVA, sin costes ocultos.
+                </p>
+                <p className="hero__offer">OFERTA VÁLIDA PARA LOS 100 PRIMEROS</p>
+              </>
             )}
 
             {isCom ? (

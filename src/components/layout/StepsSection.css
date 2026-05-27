@@ -25,7 +25,61 @@
 
 @media (max-width: 640px) {
   .steps__list {
-    grid-template-columns: 1fr;
+    display: flex;
+    grid-template-columns: none;
+    gap: 18px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin-inline: calc(var(--page-gutter) * -1);
+    padding: 0 var(--page-gutter) 6px;
+    scroll-padding-inline: var(--page-gutter);
+  }
+
+  .steps__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .steps__item {
+    flex: 0 0 78%;
+    min-width: 78%;
+    scroll-snap-align: start;
+  }
+}
+
+.steps__progress {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .steps__progress {
+    display: block;
+    position: relative;
+    width: 100%;
+    max-width: 240px;
+    height: 6px;
+    margin: 22px auto 0;
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .steps__progress-fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(
+      90deg,
+      #5dade2 0%,
+      #2d9cdb 35%,
+      #0c4a6e 75%,
+      #020617 100%
+    );
+    transition: width 0.45s ease;
   }
 }
 

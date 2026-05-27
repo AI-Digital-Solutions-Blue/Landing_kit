@@ -25,11 +25,18 @@
   color: #0a0a0a;
   background: transparent;
   box-sizing: border-box;
-  overflow-x: visible;
+  overflow-x: clip;
 }
 
 /* Padding vertical uniforme en todas las secciones del main salvo el hero */
 .site-main > *:not(.hero) {
   padding-top: var(--section-block-py);
   padding-bottom: var(--section-block-py);
+}
+
+@media (max-width: 640px) {
+  .site-main > *:not(.hero) {
+    padding-top: clamp(20px, 5vw, 32px);
+    padding-bottom: clamp(20px, 5vw, 32px);
+  }
 }

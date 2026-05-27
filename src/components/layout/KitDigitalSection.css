@@ -21,8 +21,12 @@
     gap: clamp(28px, 5vw, 40px);
   }
 
+  .kit-digital__content {
+    order: 0;
+  }
+
   .kit-digital__media {
-    order: -1;
+    order: 1;
   }
 }
 
@@ -36,9 +40,16 @@
 .kit-digital__title {
   margin: 0;
   font-size: clamp(1.65rem, 3.8vw, 2.5rem);
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.15;
   letter-spacing: -0.03em;
+}
+
+@media (max-width: 640px) {
+  .kit-digital__title {
+    font-size: clamp(2.1rem, 9vw, 2.8rem);
+    line-height: 1.18;
+  }
 }
 
 .kit-digital__title-prefix {
@@ -101,6 +112,14 @@
 .kit-digital__btn:focus-visible {
   outline: 2px solid var(--kit-accent);
   outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .kit-digital__btn {
+    padding: 9px 16px;
+    font-size: 0.78rem;
+    border-width: 1px;
+  }
 }
 
 .kit-digital__media {

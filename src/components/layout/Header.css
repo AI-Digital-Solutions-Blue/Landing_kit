@@ -27,7 +27,7 @@
 .site-header__brand {
   font-family: 'Gardenia', 'Poppins', system-ui, sans-serif;
   font-weight: 500;
-  font-size: clamp(2.2rem, 8vw, 3.75rem);
+  font-size: clamp(3rem, 16vw, 5rem);
   letter-spacing: -0.02em;
   color: var(--header-text);
   text-decoration: none;
@@ -121,20 +121,7 @@
 }
 
 @media (max-width: 640px) {
-  .site-header__inner {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
   .site-header__actions {
-    justify-content: stretch;
-    width: 100%;
-  }
-
-  .site-header__btn {
-    width: 100%;
-    min-height: 44px;
-    text-align: center;
-    box-sizing: border-box;
+    display: none;
   }
 }

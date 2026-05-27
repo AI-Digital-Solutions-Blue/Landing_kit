@@ -33,8 +33,8 @@ export function Layout() {
         <KitSolutionsSection />
         <EligeEquipoSection />
         <GanasSection />
-        <PorqueSiwebSection />
         <ProyectosKitSection />
+        <PorqueSiwebSection />
         <KitCtaFormSection />
       </main>
       <ContactFormModal />

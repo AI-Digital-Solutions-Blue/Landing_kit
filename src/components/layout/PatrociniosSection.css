@@ -5,6 +5,13 @@
   box-sizing: border-box;
 }
 
+@media (max-width: 960px) {
+  .site-main > .patrocinios {
+    padding-top: 0;
+    margin-top: clamp(-220px, -32vw, -100px);
+  }
+}
+
 .patrocinios__inner {
   width: 100%;
   max-width: var(--content-max);
@@ -61,6 +68,14 @@
   max-width: 420px;
   border-right: 1px solid rgba(0, 0, 0, 0.28);
   padding: clamp(14px, 2.2vw, 22px) clamp(26px, 4.5vw, 48px);
+}
+
+@media (max-width: 640px) {
+  .patrocinios__item {
+    min-width: 180px;
+    padding: 10px 14px;
+    min-height: 100px;
+  }
 }
 
 .patrocinios__card {

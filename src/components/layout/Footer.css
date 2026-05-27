@@ -102,6 +102,13 @@
   color: var(--footer-fg);
 }
 
+@media (max-width: 640px) {
+  .site-footer__heading {
+    font-size: 1.35rem;
+    font-weight: 400;
+  }
+}
+
 .site-footer__list {
   list-style: none;
   margin: 0;

@@ -26,7 +26,7 @@
   margin: 0;
   max-width: 100%;
   font-size: clamp(1.5rem, 3.4vw, 2.15rem);
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.18;
   letter-spacing: -0.03em;
   text-align: left;
@@ -92,6 +92,14 @@
 .ganas__btn:focus-visible {
   outline: 2px solid var(--ganas-accent);
   outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .ganas__btn {
+    padding: 9px 16px;
+    font-size: 0.78rem;
+    border-width: 1px;
+  }
 }
 
 .ganas__cards {
@@ -197,6 +205,10 @@
 @media (max-width: 520px) {
   .ganas__cards {
     grid-template-columns: 1fr;
+    gap: 18px;
+    border-radius: 0;
+    overflow: visible;
+    box-shadow: none;
   }
 
   .ganas__card:nth-child(odd) {
@@ -209,11 +221,23 @@
   }
 
   .ganas__card:not(:last-child) {
-    border-bottom: 2px solid #dde3ea;
+    border-bottom: none;
   }
 
   .ganas__card {
     min-height: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow:
+      0 14px 28px rgba(15, 23, 42, 0.12),
+      0 4px 10px rgba(15, 23, 42, 0.08);
+  }
+}
+
+@media (max-width: 640px) {
+  .ganas__title {
+    font-size: clamp(2rem, 9vw, 2.7rem);
+    line-height: 1.18;
   }
 }
 
@@ -227,6 +251,14 @@
     0 0 14px rgba(255, 255, 255, 1),
     0 0 20px rgba(255, 255, 255, 0.85),
     0 1px 2px rgba(255, 255, 255, 0.95);
+}
+
+@media (max-width: 640px) {
+  .ganas__card-title {
+    font-size: clamp(1.55rem, 6.5vw, 2rem);
+    font-weight: 200;
+    line-height: 1.2;
+  }
 }
 
 .ganas__card-text {
