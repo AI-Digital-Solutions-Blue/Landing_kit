@@ -81,6 +81,15 @@
   padding-left: clamp(243px, 12vw, 335px);
 }
 
+@media (max-width: 640px) {
+  .promo-strip__copy--com {
+    padding-left: 0;
+    margin-inline: 0;
+    align-items: flex-start;
+    max-width: 100%;
+  }
+}
+
 .promo-strip__paragraph {
   margin: 0;
   max-width: 100%;
