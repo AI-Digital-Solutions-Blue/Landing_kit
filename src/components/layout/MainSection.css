@@ -232,7 +232,7 @@
 }
 
 .hero__offer {
-  margin: clamp(-18px, -2vw, -10px) 0 clamp(-18px, -2vw, -10px);
+  margin: clamp(-12px, -1.4vw, -6px) 0 clamp(2px, 0.6vw, 8px);
   font-size: clamp(1.25rem, 2.8vw, 1.5rem);
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -243,8 +243,8 @@
 @media (max-width: 640px) {
   .hero__offer {
     font-size: 1.15rem;
-    margin-top: -10px;
-    margin-bottom: -10px;
+    margin-top: -8px;
+    margin-bottom: 6px;
   }
 }
 
