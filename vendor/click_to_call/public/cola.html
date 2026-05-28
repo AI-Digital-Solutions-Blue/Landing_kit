@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Click-to-Call (cola) · PoC</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="hero">
+    <h1>¿Necesitas que te llamemos?</h1>
+    <p>Te llamamos gratis. Te conectamos con el primer agente disponible.</p>
+
+    <!-- Contenedor donde el widget se incrusta (modo embedded, sin icono flotante) -->
+    <div id="l7-callmeback-icon" style="display:inline-block; min-width:240px; min-height:240px; margin-top:1rem;"></div>
+
+    <p style="color:#6b7280; font-size:0.85rem; margin-top:2rem;">
+      Esta página usa el widget oficial de VoIPstudio (Call Me Back) apuntando a la cola Canarias.
+      <br>
+      Para la versión con form propio + endpoint backend (agente fijo), abre <a href="/">/</a>.
+    </p>
+  </main>
+
+  <!-- Widget oficial VoIPstudio Call Me Back, settings id=1552, token público K009-6a02176aa8d84 -->
+  <script>
+    window.__247lc = window.__be || {};
+    window.__247lc.id = 'K009-6a02176aa8d84';
+    (function() {
+      var be = document.createElement('script'); be.type = 'text/javascript'; be.async = true;
+      be.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'static.ssl7.net/l7t.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(be, s);
+    })();
+  </script>
+</body>
+</html>

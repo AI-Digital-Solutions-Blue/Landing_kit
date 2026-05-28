@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Click-to-Call · PoC</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="hero">
+    <h1>¿Necesitas que te llamemos?</h1>
+    <p>Te llamamos gratis en menos de 30 segundos. Sin esperas.</p>
+    <button id="open-modal" type="button" class="cta">¿Te llamamos gratis?</button>
+  </main>
+
+  <div id="modal" class="modal" hidden aria-hidden="true" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+    <div class="modal-card">
+      <button id="close-modal" type="button" class="close" aria-label="Cerrar">×</button>
+      <h2 id="modal-title">Te llamamos en segundos</h2>
+
+      <form id="call-form" novalidate>
+        <label for="phone">
+          Tu número de teléfono <span aria-hidden="true">*</span>
+          <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
+            placeholder="+34 600 000 000" required>
+        </label>
+
+        <label for="name">
+          Tu nombre <span class="muted">(opcional)</span>
+          <input id="name" name="name" type="text" autocomplete="given-name" maxlength="80">
+        </label>
+
+        <label class="consent">
+          <input id="consent" name="consent" type="checkbox" required>
+          <span>Acepto que me llaméis al número indicado para resolver mi consulta.</span>
+        </label>
+
+        <button id="submit" type="submit" class="cta">Llamadme ahora</button>
+      </form>
+
+      <div id="feedback" class="feedback" hidden></div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

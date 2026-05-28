@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:voipstudio.com)",
+      "Bash(npm --version)",
+      "Bash(npm install *)",
+      "Bash(npm test *)",
+      "Bash(npm start *)",
+      "Bash(curl -s -w \"\\\\nHTTP %{http_code}\\\\n\" -X POST \"http://localhost:3000/api/click-to-call\" -H \"Content-Type: application/json\" -d '{\"phone\":\"34630733730\",\"consent\":false}')",
+      "Bash(curl -s -w \"\\\\nHTTP %{http_code}\\\\n\" -X POST \"http://localhost:3000/api/click-to-call\" -H \"Content-Type: application/json\" -d '{\"phone\":\"abc\",\"consent\":true}')",
+      "Bash(curl -s -o /dev/null -w \"GET / → HTTP %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /tmp/index.html -w \"HTTP %{http_code} | content-length %{size_download}\\\\n\" http://localhost:3007/)",
+      "Read(//tmp/**)",
+      "Bash(curl -s -w \"\\\\nHTTP %{http_code}\\\\n\" -X POST http://localhost:3007/api/click-to-call -H \"Content-Type: application/json\" -d '{\"phone\":\"34630733730\",\"consent\":false}')",
+      "Bash(curl -s -w \"\\\\nHTTP %{http_code}\\\\n\" -X POST http://localhost:3007/api/click-to-call -H \"Content-Type: application/json\" -d '{\"phone\":\"abc\",\"consent\":true}')",
+      "Bash(curl -s -o /dev/null -w \"Servidor: HTTP %{http_code}\\\\n\" http://localhost:3007/)",
+      "Bash(pkill -f \"node.*server.js\")",
+      "Bash(curl -s -o /dev/null -w '__TRACKED_VAR__: HTTP %{http_code}\\\\n' -X POST http://localhost:3007/api/click-to-call -H 'Content-Type: application/json' -d '{\"phone\":\"abc\",\"consent\":true}')",
+      "Bash(curl -s -o /dev/null -w \"Servidor en 3007: HTTP %{http_code}\\\\n\" http://localhost:3007/)",
+      "Bash(kill 2363551 2363550)",
+      "WebSearch",
+      "Bash(curl -sL https://voipstudio.com/)",
+      "Bash(curl -sL https://voipstudio.com/call-me-back/)",
+      "Bash(curl -sI \"https://static.ssl7.net/l7t.js\")",
+      "Bash(curl -s \"https://static.ssl7.net/l7t.js\" -o /tmp/l7t.js)",
+      "Bash(curl -s -o /dev/null -w \"GET /cola.html → HTTP %{http_code}\\\\n\" \"http://localhost:3007/cola.html\")",
+      "Bash(python3 -c ' *)"
+    ]
+  }
+}

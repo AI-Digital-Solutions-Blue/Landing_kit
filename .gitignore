@@ -13,7 +13,7 @@ dist-ssr
 *.local
 
 # PoC y materiales internos
-vendor/
+
 
 # Python (kd-service)
 __pycache__/
