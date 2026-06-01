@@ -15,9 +15,27 @@ const app = express()
 app.disable('x-powered-by')
 app.set('trust proxy', 1)
 
-const allowedOrigins = config.LANDING_ORIGIN.split(',')
-  .map((o) => o.trim())
-  .filter(Boolean)
+/**
+ * Siempre permitimos los dos hostnames principales del producto (.es y .com)
+ * para evitar problemas de CORS por configuracion del .env en el VPS.
+ * El LANDING_ORIGIN del .env sigue siendo la fuente para origenes adicionales
+ * (p.ej. http://localhost:5173 en dev o subdominios de staging).
+ */
+const HARDCODED_ALLOWED_ORIGINS = [
+  'https://siwebcanarias.es',
+  'https://www.siwebcanarias.es',
+  'https://siwebcanarias.com',
+  'https://www.siwebcanarias.com',
+]
+
+const allowedOrigins = Array.from(
+  new Set([
+    ...HARDCODED_ALLOWED_ORIGINS,
+    ...config.LANDING_ORIGIN.split(',')
+      .map((o) => o.trim())
+      .filter(Boolean),
+  ]),
+)
 
 app.use(helmet())
 app.use(
