@@ -15,7 +15,7 @@ module.exports = {
       name: 'kd-service',
       cwd: __dirname,
       script: '.venv/bin/uvicorn',
-      args: 'app.main:app --host 127.0.0.1 --port 8001 --workers 1 --log-level info',
+      args: 'app.main:app --host 127.0.0.1 --port 8003 --workers 1 --log-level info',
       interpreter: 'none',
       autorestart: true,
       max_memory_restart: '500M',
