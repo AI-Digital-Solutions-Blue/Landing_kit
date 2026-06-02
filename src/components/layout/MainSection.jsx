@@ -13,14 +13,13 @@ const heroBulletsEs = [
 ]
 
 const heroBulletsCom = [
-  'Programa de gestión y facturación, con tu bono',
+  'Sin coste para ti',
+  'Sin IVA (empresa canaria)',
   'Verifactu hasta 2027',
-  'Control horario digital hasta 2027',
   'Portátil de regalo',
+  'Programa de gestión y facturación, con tu bono',
+  'Control horario digital hasta 2027',
 ]
-
-const heroComPerks = ['Sin coste para ti', 'Sin IVA (empresa canaria)']
-const heroPerkTickSrc = '/tick.svg'
 const heroBadgeMonitorSrc = '/monitor.svg?v=2'
 
 export function MainSection() {
@@ -69,14 +68,14 @@ export function MainSection() {
                 <>
                   <h1 id="hero-heading" className="hero__title">
                     <span className="hero__title-line">
-                      Consume los <span className="hero__accent">3.000€</span>
+                      Consume los <span className="hero__accent">3.000€</span> de tu
                     </span>
                     <span className="hero__title-line">
-                      de tu Kit Digital en servicios
+                      Kit Digital <span className="hero__accent">en servicios</span>
                     </span>
                   </h1>
                   <h2 id="hero-subheading" className="hero__subtitle">
-                    Y Siweb te <span className="hero__accent">regala</span> este portátil.
+                    Y Siweb te regala <span className="hero__accent">este portátil.</span>
                   </h2>
                   <p className="hero__disclaimer">*o modelo similar de la marca Lenovo</p>
                 </>
@@ -86,44 +85,18 @@ export function MainSection() {
             {isCom ? (
               <div className="hero__lead-stack">
                 <p className="hero__lead">
-                  Contrata el programa de <strong>gestión de clientes y factura electrónica</strong>
+                  Contrata el programa de <strong>gestión de clientes y factura electrónica</strong> con tu Kit Digital.
                   <br />
-                  con tu Kit Digital. Nosotros incluimos <strong>Verifactu, control horario digital</strong> y un 
-                   <br /><strong>portátil</strong>. Sin trámites con la administración, sin coste adicional.
+                  Nosotros incluimos <strong>Verifactu, control horario digital</strong> y un <strong>portátil</strong>. Sin trámites con la
+                  <br />
+                  administración, sin coste adicional.
                 </p>
               </div>
             ) : (
               <p className="hero__lead">
-                Tienes un bono Kit Digital concedido que caduca en menos de 6
-                <br />
-                meses. Úsalo con Siweb Canarias y <strong>llévate un portátil de regalo</strong>
-                <br />
-                sin IVA, sin costes ocultos.
+                Tienes un bono Kit Digital concedido que caduca en menos de 6 meses. Úsalo con Siweb Canarias y <strong>llévate un portátil de regalo</strong> sin IVA, sin costes ocultos.
               </p>
             )}
-
-            <p className="hero__offer">OFERTA VÁLIDA PARA LOS 100 PRIMEROS</p>
-
-            {isCom ? (
-              <ul className="hero__perks" aria-label="Ventajas principales">
-                {heroComPerks.map((line) => (
-                  <li key={line} className="hero__perks-item">
-                    <span className="hero__perks-icon-wrap" aria-hidden="true">
-                      <img
-                        className="hero__perk-icon"
-                        src={heroPerkTickSrc}
-                        alt=""
-                        width={30}
-                        height={30}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </span>
-                    <span className="hero__perks-text">{line}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
 
             <div className="hero__actions">
               <CtaOpenLeadModalLink className="hero__btn hero__btn--outline">Activar mi bono</CtaOpenLeadModalLink>
@@ -148,6 +121,8 @@ export function MainSection() {
                 </li>
               ))}
             </ul>
+
+            <p className="hero__offer">OFERTA VÁLIDA PARA LOS 100 PRIMEROS</p>
           </div>
         </section>
 
