@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 /**
  * Mismo bloque de formulario que en la sección Kit CTA (cristal + campos + envío).
  * `variant`: "section" mantiene estilos actuales; "modal" añade clase en el contenedor glass.
@@ -6,6 +8,8 @@ export function KitCtaFormBody({ variant = 'section', isSubmitting = false, fiel
   const glassClass =
     variant === 'modal' ? 'kit-cta__glass kit-cta__glass--modal' : 'kit-cta__glass'
   const errorPrefix = variant === 'modal' ? 'kit-cta-modal-error' : 'kit-cta-section-error'
+  const consentId = variant === 'modal' ? 'kit-cta-modal-consent' : 'kit-cta-section-consent'
+  const [consentChecked, setConsentChecked] = useState(false)
 
   return (
     <div className={glassClass}>
@@ -156,7 +160,48 @@ export function KitCtaFormBody({ variant = 'section', isSubmitting = false, fiel
         </label>
       </div>
 
-      <button className="kit-cta__submit" type="submit" disabled={isSubmitting}>
+      <label
+        className={`kit-cta__consent${fieldErrors.consent ? ' kit-cta__consent--invalid' : ''}`}
+        htmlFor={consentId}
+      >
+        <input
+          id={consentId}
+          className="kit-cta__consent-input"
+          type="checkbox"
+          name="consent"
+          checked={consentChecked}
+          onChange={(ev) => setConsentChecked(ev.target.checked)}
+          disabled={isSubmitting}
+          aria-invalid={Boolean(fieldErrors.consent)}
+        />
+        <span className="kit-cta__consent-text">
+          Acepto la{' '}
+          <a
+            href="/privacidad"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(ev) => ev.stopPropagation()}
+          >
+            Política de Privacidad
+          </a>
+          {' '}y los{' '}
+          <a
+            href="/terminos"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(ev) => ev.stopPropagation()}
+          >
+            Términos y Condiciones
+          </a>
+          .
+        </span>
+      </label>
+
+      <button
+        className="kit-cta__submit"
+        type="submit"
+        disabled={isSubmitting || !consentChecked}
+      >
         <span className="kit-cta__submit-label kit-cta__grad-text">
           {isSubmitting ? 'Enviando…' : 'Quiero mi portátil gratis'}
         </span>

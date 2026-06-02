@@ -162,12 +162,25 @@ export function ContactFormModal() {
   })
   const [fieldErrors, setFieldErrors] = useState({})
   const [hasSubmittedOnce, setHasSubmittedOnce] = useState(false)
+  const [consentChecked, setConsentChecked] = useState(false)
+  const [nombreValue, setNombreValue] = useState('')
+  const [telefonoValue, setTelefonoValue] = useState('')
   const [now, setNow] = useState(() => new Date())
   const [selectedSlotIso, setSelectedSlotIso] = useState(null)
+
+  const isFormReady =
+    consentChecked &&
+    nombreValue.trim().length > 0 &&
+    isValidPhone(telefonoValue)
 
   useEffect(() => {
     if (!isOpen) return undefined
     setNow(new Date())
+    setConsentChecked(false)
+    setNombreValue('')
+    setTelefonoValue('')
+    setFieldErrors({})
+    setHasSubmittedOnce(false)
     const id = window.setInterval(() => setNow(new Date()), 60_000)
     return () => window.clearInterval(id)
   }, [isOpen])
@@ -209,10 +222,14 @@ export function ContactFormModal() {
     const form = e.currentTarget
     markFormStarted(form)
     if (!hasSubmittedOnce) return
+    const nombre = String(form.elements.namedItem('nombre')?.value ?? '').trim()
     const telefono = String(form.elements.namedItem('telefono')?.value ?? '').trim()
+    const consent = Boolean(form.elements.namedItem('consent')?.checked)
     const nextErrors = {}
+    if (!nombre) nextErrors.nombre = 'Introduce tu nombre.'
     if (!telefono) nextErrors.telefono = 'Introduce tu número de teléfono.'
     else if (!isValidPhone(telefono)) nextErrors.telefono = 'Introduce un teléfono válido.'
+    if (!consent) nextErrors.consent = 'Debes aceptar para que te llamemos.'
     setFieldErrors(nextErrors)
   }
 
@@ -266,15 +283,21 @@ export function ContactFormModal() {
             e.preventDefault()
             const form = e.currentTarget
             markFormStarted(form)
+            const nombre = String(form.elements.namedItem('nombre')?.value ?? '').trim()
             const telefono = String(form.elements.namedItem('telefono')?.value ?? '').trim()
+            const consent = Boolean(form.elements.namedItem('consent')?.checked)
             const errors = {}
+            if (!nombre) errors.nombre = 'Introduce tu nombre.'
             if (!telefono) errors.telefono = 'Introduce tu número de teléfono.'
             else if (!isValidPhone(telefono)) errors.telefono = 'Introduce un teléfono válido.'
+            if (!consent) errors.consent = 'Debes aceptar para que te llamemos.'
 
             setHasSubmittedOnce(true)
             setFieldErrors(errors)
             if (Object.keys(errors).length > 0) {
-              if (errors.telefono) form.elements.namedItem('telefono')?.focus?.()
+              if (errors.nombre) form.elements.namedItem('nombre')?.focus?.()
+              else if (errors.telefono) form.elements.namedItem('telefono')?.focus?.()
+              else if (errors.consent) form.elements.namedItem('consent')?.focus?.()
               return
             }
             submitForm(form)
@@ -341,6 +364,8 @@ export function ContactFormModal() {
                   name="nombre"
                   placeholder="Tu nombre"
                   autoComplete="name"
+                  value={nombreValue}
+                  onChange={(ev) => setNombreValue(ev.target.value)}
                   disabled={status === 'loading'}
                 />
               </div>
@@ -374,13 +399,61 @@ export function ContactFormModal() {
                   placeholder="Tu teléfono"
                   autoComplete="tel"
                   inputMode="tel"
+                  value={telefonoValue}
+                  onChange={(ev) => setTelefonoValue(ev.target.value)}
                   aria-invalid={Boolean(fieldErrors.telefono)}
                   disabled={status === 'loading'}
                 />
               </div>
               {fieldErrors.telefono ? <p className="contact-modal__field-error">{fieldErrors.telefono}</p> : null}
 
-              <button className="contact-modal__submit" type="submit" disabled={status === 'loading'}>
+              <label
+                className={`contact-modal__consent${
+                  fieldErrors.consent ? ' contact-modal__consent--invalid' : ''
+                }`}
+                htmlFor="contact-modal-consent"
+              >
+                <input
+                  id="contact-modal-consent"
+                  className="contact-modal__consent-input"
+                  type="checkbox"
+                  name="consent"
+                  checked={consentChecked}
+                  onChange={(ev) => setConsentChecked(ev.target.checked)}
+                  disabled={status === 'loading'}
+                  aria-invalid={Boolean(fieldErrors.consent)}
+                />
+                <span className="contact-modal__consent-text">
+                  Acepto recibir una llamada comercial y la{' '}
+                  <a
+                    href="/privacidad"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(ev) => ev.stopPropagation()}
+                  >
+                    Política de Privacidad
+                  </a>
+                  {' '}y los{' '}
+                  <a
+                    href="/terminos"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(ev) => ev.stopPropagation()}
+                  >
+                    Términos y Condiciones
+                  </a>
+                  .
+                </span>
+              </label>
+              {fieldErrors.consent ? (
+                <p className="contact-modal__field-error">{fieldErrors.consent}</p>
+              ) : null}
+
+              <button
+                className="contact-modal__submit"
+                type="submit"
+                disabled={status === 'loading' || !isFormReady}
+              >
                 <span className="contact-modal__submit-icon" aria-hidden="true">
                   {showSlots ? (
                     <svg viewBox="0 0 24 24" width="16" height="16" focusable="false">

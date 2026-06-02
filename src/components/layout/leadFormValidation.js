@@ -1,4 +1,4 @@
-const FIELD_ORDER = ['nombre', 'empresa', 'telefono', 'email', 'kit_concedido', 'solucion']
+const FIELD_ORDER = ['nombre', 'empresa', 'telefono', 'email', 'kit_concedido', 'solucion', 'consent']
 
 const REQUIRED_MESSAGES = {
   nombre: 'Introduce tu nombre.',
@@ -7,6 +7,7 @@ const REQUIRED_MESSAGES = {
   email: 'Introduce tu email.',
   kit_concedido: 'Selecciona si ya tienes concedido el Kit Digital.',
   solucion: 'Selecciona la solución que te interesa.',
+  consent: 'Debes aceptar la Política de Privacidad y los Términos.',
 }
 const BLOCKED_EMAILS = new Set(['info@siwebintegral.com'])
 
@@ -30,6 +31,12 @@ export function validateLeadForm(form) {
   for (const fieldName of FIELD_ORDER) {
     const element = form.elements.namedItem(fieldName)
     if (!(element instanceof HTMLElement)) continue
+
+    if (fieldName === 'consent') {
+      const checked = 'checked' in element ? Boolean(element.checked) : false
+      if (!checked) errors[fieldName] = REQUIRED_MESSAGES[fieldName]
+      continue
+    }
 
     const rawValue = 'value' in element ? String(element.value ?? '') : ''
     const value = rawValue.trim()

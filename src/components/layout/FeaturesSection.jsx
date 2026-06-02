@@ -11,8 +11,8 @@ const items = [
     imageAlt: 'Gestión de clientes y panel de datos con Sygna',
     body: (
       <>
-        Organiza contactos, centraliza la información de tus clientes, organiza tu actividad comercial y trabaja con una{' '}
-        <strong>visión clara de tu negocio.</strong>
+        Registra la jornada laboral de tu equipo, controla horas trabajadas, ausencias y horas extra, y{' '}
+        <strong>cumple con la normativa vigente</strong> y obtén informes en tiempo real.
       </>
     ),
   },

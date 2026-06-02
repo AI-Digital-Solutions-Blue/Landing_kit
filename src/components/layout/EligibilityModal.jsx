@@ -60,9 +60,18 @@ export function EligibilityModal() {
   } = useXilonAuthorization()
   const [fieldErrors, setFieldErrors] = useState({})
   const [hasSubmittedOnce, setHasSubmittedOnce] = useState(false)
+  const [consentChecked, setConsentChecked] = useState(false)
+  const [formValues, setFormValues] = useState({ nif: '', bono: '', categoria: '' })
   const [view, setView] = useState('form') // 'form' | 'result' | 'activate' | 'activated'
   const [lastNif, setLastNif] = useState('')
   const [lastCategoria, setLastCategoria] = useState('')
+
+  const isFormReady =
+    consentChecked &&
+    String(formValues.nif ?? '').trim().length > 0 &&
+    String(formValues.bono ?? '').trim().length > 0 &&
+    String(formValues.categoria ?? '').trim().length > 0 &&
+    Object.keys(fieldErrors).length === 0
   const panelRef = useRef(null)
   const previouslyFocused = useRef(null)
 
@@ -72,6 +81,8 @@ export function EligibilityModal() {
       resetActivation()
       setFieldErrors({})
       setHasSubmittedOnce(false)
+      setConsentChecked(false)
+      setFormValues({ nif: '', bono: '', categoria: '' })
       setView('form')
       setLastNif('')
       setLastCategoria('')
@@ -139,13 +150,14 @@ export function EligibilityModal() {
   }
 
   const handleEdit = (e) => {
-    if (!hasSubmittedOnce) return
     const form = e.currentTarget
     const data = {
-      nif: form.elements.namedItem('nif')?.value,
-      bono: form.elements.namedItem('bono')?.value,
-      categoria: form.elements.namedItem('categoria')?.value,
+      nif: form.elements.namedItem('nif')?.value ?? '',
+      bono: form.elements.namedItem('bono')?.value ?? '',
+      categoria: form.elements.namedItem('categoria')?.value ?? '',
     }
+    setFormValues(data)
+    if (!hasSubmittedOnce) return
     setFieldErrors(validate(data).errors)
   }
 
@@ -299,10 +311,46 @@ export function EligibilityModal() {
         </label>
       </div>
 
+      <label
+        className="eligibility-modal__consent"
+        htmlFor="eligibility-modal-consent"
+      >
+        <input
+          id="eligibility-modal-consent"
+          className="eligibility-modal__consent-input"
+          type="checkbox"
+          name="consent"
+          checked={consentChecked}
+          onChange={(ev) => setConsentChecked(ev.target.checked)}
+          disabled={status === 'loading'}
+        />
+        <span className="eligibility-modal__consent-text">
+          Acepto la{' '}
+          <a
+            href="/privacidad"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(ev) => ev.stopPropagation()}
+          >
+            Política de Privacidad
+          </a>
+          {' '}y los{' '}
+          <a
+            href="/terminos"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(ev) => ev.stopPropagation()}
+          >
+            Términos y Condiciones
+          </a>
+          .
+        </span>
+      </label>
+
       <button
         className="eligibility-modal__submit"
         type="submit"
-        disabled={status === 'loading'}
+        disabled={status === 'loading' || !isFormReady}
       >
         <span className="eligibility-modal__submit-label">
           {status === 'loading' ? 'Comprobando…' : 'Comprobar mi bono'}
@@ -310,11 +358,7 @@ export function EligibilityModal() {
       </button>
 
       <p className="eligibility-modal__hint">
-        Tus datos solo se usan para esta consulta. Más en{' '}
-        <a href="/privacidad" target="_blank" rel="noopener noreferrer">
-          política de privacidad
-        </a>
-        .
+        Tus datos solo se usan para esta consulta.
       </p>
     </form>
   )

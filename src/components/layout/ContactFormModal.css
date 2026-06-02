@@ -264,6 +264,86 @@
   color: #b91c1c;
 }
 
+.contact-modal__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 2px 0 6px;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 8px;
+  font-size: 0.58rem;
+  line-height: 1.2;
+  color: #1f2937;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.contact-modal__consent:hover {
+  border-color: rgba(45, 156, 219, 0.45);
+}
+
+.contact-modal__consent--invalid {
+  border-color: #ef4444;
+  background: rgba(254, 226, 226, 0.95);
+}
+
+.contact-modal__consent-input {
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  margin: 1px 0 0;
+  border: 1.5px solid #94a3b8;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.contact-modal__consent-input:hover {
+  border-color: #2d9cdb;
+}
+
+.contact-modal__consent-input:focus-visible {
+  outline: 2px solid #2d9cdb;
+  outline-offset: 2px;
+}
+
+.contact-modal__consent-input:checked {
+  background: #2d9cdb;
+  border-color: #2d9cdb;
+}
+
+.contact-modal__consent-input:checked::after {
+  content: '';
+  width: 6px;
+  height: 3px;
+  margin-top: -1px;
+  border: solid #ffffff;
+  border-width: 0 0 1.5px 1.5px;
+  transform: rotate(-45deg);
+}
+
+.contact-modal__consent-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-modal__consent-text a {
+  color: #2d9cdb;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.contact-modal__consent-text a:hover {
+  color: #1565a8;
+}
+
 .contact-modal__success {
   margin: 0;
   font-size: 0.86rem;
