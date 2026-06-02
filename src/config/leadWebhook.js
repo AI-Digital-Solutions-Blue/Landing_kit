@@ -5,6 +5,10 @@ export const LEAD_WEBHOOK_URL = 'https://hook.eu2.make.com/os2z95prtq3bkq5u6k4id
 export const CALLBACK_SHEET_WEBHOOK_URL =
   'https://hook.eu2.make.com/d95uerrkwed93bsawo5a0l221ulwjlsp'
 
+/** Webhook Make.com (scenario) para registrar activaciones de bono en el sheet */
+export const ACTIVATION_SHEET_WEBHOOK_URL =
+  'https://hook.eu2.make.com/p7jgomnb48d8a4acyxpqlja4xjqh63e4'
+
 /**
  * Base URL del backend propio (proxy hacia kd_contract_parser y VoIPstudio).
  * En dev se apunta al server local; en prod se sobreescribe con VITE_API_BASE.

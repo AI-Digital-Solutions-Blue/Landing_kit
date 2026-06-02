@@ -130,11 +130,11 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.03em;
+  gap: 0;
   font-size: var(--hero-title-size);
   font-weight: 400;
   /* Evita recortar descendentes (g, y, p) con background-clip: text */
-  line-height: 1.18;
+  line-height: 0.92;
   letter-spacing: -0.035em;
   text-align: left;
   overflow: visible;
@@ -156,18 +156,18 @@
 
 .hero__title-line {
   display: block;
-  line-height: 1.18;
-  padding-bottom: 0.06em;
+  line-height: 1;
+  padding-bottom: 0.02em;
   overflow: visible;
 }
 
 .hero__subtitle {
-  margin: clamp(8px, 1.4vw, 14px) 0 0;
+  margin: clamp(2px, 0.4vw, 6px) 0 0;
   max-width: 100%;
   font-size: var(--hero-subtitle-size);
   font-weight: 500;
-  line-height: 1.2;
-  padding-bottom: 0.08em;
+  line-height: 1.05;
+  padding-bottom: 0.04em;
   overflow: visible;
   letter-spacing: -0.032em;
   text-align: left;
@@ -190,6 +190,16 @@
 .hero__subtitle.hero__subtitle--com {
   margin-top: clamp(2px, 0.45vw, 6px);
   padding-bottom: 0.02em;
+}
+
+.hero__disclaimer {
+  margin: clamp(2px, 0.6vw, 6px) 0 0;
+  font-size: clamp(0.78rem, 1.6vw, 0.9rem);
+  font-weight: 400;
+  font-style: italic;
+  color: #6b7280;
+  letter-spacing: 0;
+  line-height: 1.3;
 }
 
 /* Los spans no deben pintar color sólido encima del degradado */
@@ -435,24 +445,40 @@
 .hero__img {
   position: relative;
   display: block;
-  width: min(2800px, 600%);
+  width: min(4200px, 900%);
   max-width: none;
   height: auto;
   margin: 0;
   margin-left: auto;
   object-fit: contain;
+  /* Zoom real sobre la PNG (la imagen original tiene mucho padding en blanco) */
+  transform: scale(1.55);
+  transform-origin: center left;
   /* Desplazamiento respecto a la posición final del flex (sustituye al translate): */
-  left: clamp(150px, 21vw, 620px);
-  top: clamp(44px, 5.5vw, 80px);
+  left: clamp(-200px, 0vw, 120px);
+  top: clamp(-120px, -7vw, -40px);
   right: auto;
   pointer-events: auto;
 
   @media (max-width: 960px) {
-    width: 160%;
+    width: 185%;
     max-width: none;
     margin-left: auto;
     margin-right: 0;
-    left: 11%;
+    left: 4%;
     top: clamp(-180px, -28vw, -80px);
+    transform: scale(1.25);
+    transform-origin: center center;
+  }
+}
+
+/* Variante .com: imagen un poco más abajo y más a la izquierda */
+.hero--com .hero__img {
+  top: clamp(-40px, -2vw, 20px);
+  left: clamp(-360px, -6vw, -20px);
+
+  @media (max-width: 960px) {
+    top: clamp(-140px, -22vw, -60px);
+    left: 0;
   }
 }

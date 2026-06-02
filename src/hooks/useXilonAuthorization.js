@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { AUTHORIZATION_URL } from '../config/leadWebhook'
+import { ACTIVATION_SHEET_WEBHOOK_URL, AUTHORIZATION_URL } from '../config/leadWebhook'
 
 const REQUEST_TIMEOUT_MS = 20000
 
@@ -39,6 +39,19 @@ export function useXilonAuthorization() {
 
     const controller = new AbortController()
     const timeoutId = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
+
+    // Fire-and-forget: registrar la activación en el sheet vía Make antes del
+    // POST al backend. No bloqueamos la activación si Make falla.
+    try {
+      fetch(ACTIVATION_SHEET_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      }).catch(() => {})
+    } catch {
+      // ignorar
+    }
 
     try {
       const res = await fetch(AUTHORIZATION_URL, {

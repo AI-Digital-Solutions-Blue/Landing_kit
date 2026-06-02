@@ -22,7 +22,7 @@
   --main-fg: #f4f4f5;
   --page-bg-fallback: #0a0f14;
   --landing-bg-w: 1920;
-  --landing-bg-h: 8335;
+  --landing-bg-h: 7100;
 
   font: 300 18px/145% 'Poppins', system-ui, sans-serif;
   letter-spacing: 0.18px;
@@ -58,11 +58,22 @@ html {
   );
   /* Base sólida bajo el SVG/PNG: los transparentes no muestran el fallback oscuro */
   background-color: #ffffff;
-  background-image: url('/landing-pc.svg');
-  background-size: min(118vw, 2400px) auto;
-  background-position: top center;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
+  /* Velo blanco muy ligero encima del SVG de fondo para suavizarlo */
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+    url('/landing-pc.svg');
+  background-size:
+    100% 100%,
+    min(118vw, 2400px) auto;
+  background-position:
+    top center,
+    top center;
+  background-repeat:
+    no-repeat,
+    no-repeat;
+  background-attachment:
+    scroll,
+    scroll;
 }
 
 body {

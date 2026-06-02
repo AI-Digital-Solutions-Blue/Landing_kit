@@ -2,7 +2,7 @@ import './MainSection.css'
 import { CtaOpenLeadModalLink } from './CtaOpenLeadModalLink'
 import { getSiteVariant } from '../../utils/siteVariant'
 
-const heroImageSrc = `/imagenes/${encodeURIComponent('PC 1 1.png')}`
+const heroImageSrc = '/imagenes/hero-lenovo.png'
 const listIconSrc = `/svg/${encodeURIComponent('iconLis.svg')}`
 
 const heroBulletsEs = [
@@ -29,7 +29,7 @@ export function MainSection() {
   const heroBullets = isCom ? heroBulletsCom : heroBulletsEs
 
   return (
-    <section className="hero" aria-labelledby="hero-heading hero-subheading">
+    <section className={`hero${isCom ? ' hero--com' : ''}`} aria-labelledby="hero-heading hero-subheading">
       <div className="hero__grid">
         <section className="hero__content">
           <div className={`hero__content-box${isCom ? ' hero__content-box--com' : ''}`}>
@@ -54,26 +54,31 @@ export function MainSection() {
                 <>
                   <h1 id="hero-heading" className="hero__title">
                     <span className="hero__title-line">
-                      Consume <span className="hero__accent">tu bono</span> <br /> Kit Digital
+                      Consume <span className="hero__accent">tu Kit Digital</span>
+                    </span>
+                    <span className="hero__title-line">
+                      en servicios
                     </span>
                   </h1>
                   <h2 id="hero-subheading" className="hero__subtitle hero__subtitle--com">
-                    Siweb te <span className="hero__accent">regala</span> el resto.
+                    Y Siweb te <span className="hero__accent">regala</span> este portátil.
                   </h2>
+                  <p className="hero__disclaimer">*o modelo similar de la marca Lenovo</p>
                 </>
               ) : (
                 <>
                   <h1 id="hero-heading" className="hero__title">
                     <span className="hero__title-line">
-                      Consume <span className="hero__accent">tu bono</span>
+                      Consume los <span className="hero__accent">3.000€</span>
                     </span>
                     <span className="hero__title-line">
-                      Te cuesta <span className="hero__accent">0 €</span>
+                      de tu Kit Digital en servicios
                     </span>
                   </h1>
                   <h2 id="hero-subheading" className="hero__subtitle">
-                    Te regalamos <span className="hero__accent">un portátil</span>
+                    Y Siweb te <span className="hero__accent">regala</span> este portátil.
                   </h2>
+                  <p className="hero__disclaimer">*o modelo similar de la marca Lenovo</p>
                 </>
               )}
             </div>

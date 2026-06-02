@@ -2,8 +2,17 @@ import { createContext, useCallback, useContext, useMemo, useState } from 'react
 
 const ContactModalContext = createContext(null)
 
+const DESKTOP_MEDIA_QUERY = '(min-width: 641px)'
+
+function getInitialContactModalOpen() {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+    return false
+  }
+  return window.matchMedia(DESKTOP_MEDIA_QUERY).matches
+}
+
 export function ContactModalProvider({ children }) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(getInitialContactModalOpen)
   const [isLeadOpen, setIsLeadOpen] = useState(false)
   const [isEligibilityOpen, setIsEligibilityOpen] = useState(false)
 

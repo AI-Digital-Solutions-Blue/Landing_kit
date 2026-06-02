@@ -9,7 +9,7 @@
 }
 
 .eligibility-modal__panel:has(.eligibility-modal__row) {
-  width: min(100%, 560px);
+  width: min(100%, 720px);
 }
 
 .eligibility-modal__body {

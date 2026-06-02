@@ -5,7 +5,6 @@ import { PortatilPromoSection } from './PortatilPromoSection'
 import { FeaturesSection } from './FeaturesSection'
 import { KitDigitalSection } from './KitDigitalSection'
 import { KitSolutionsSection } from './KitSolutionsSection'
-import { EligeEquipoSection } from './EligeEquipoSection'
 import { GanasSection } from './GanasSection'
 import { PorqueSiwebSection } from './PorqueSiwebSection'
 import { ProyectosKitSection } from './ProyectosKitSection'
@@ -31,7 +30,6 @@ export function Layout() {
         <KitDigitalSection />
         <StepsSection />
         <KitSolutionsSection />
-        <EligeEquipoSection />
         <GanasSection />
         <ProyectosKitSection />
         <PorqueSiwebSection />
