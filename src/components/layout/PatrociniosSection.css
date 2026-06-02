@@ -7,8 +7,8 @@
 
 @media (max-width: 960px) {
   .site-main > .patrocinios {
-    padding-top: 0;
-    margin-top: clamp(-220px, -32vw, -100px);
+    padding-top: clamp(24px, 6vw, 48px);
+    margin-top: 0;
   }
 }
 

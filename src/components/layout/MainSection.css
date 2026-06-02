@@ -263,9 +263,13 @@
 
 @media (max-width: 640px) {
   .hero__offer {
-    font-size: 1.15rem;
+    font-size: 0.95rem;
     margin-top: 12px;
     margin-bottom: 6px;
+    padding-right: 0;
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
   }
 }
 
@@ -499,13 +503,13 @@
   pointer-events: auto;
 
   @media (max-width: 960px) {
-    width: 185%;
-    max-width: none;
+    width: 78%;
+    max-width: 360px;
     margin-left: auto;
-    margin-right: 0;
-    left: 4%;
-    top: clamp(-180px, -28vw, -80px);
-    transform: scale(-1.25, 1.25);
+    margin-right: auto;
+    left: 0;
+    top: 0;
+    transform: scaleX(-1);
     transform-origin: center center;
   }
 }
