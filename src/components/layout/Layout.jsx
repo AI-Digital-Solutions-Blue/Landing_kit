@@ -2,6 +2,7 @@ import { Header } from './Header'
 import { MainSection } from './MainSection'
 import { PatrociniosSection } from './PatrociniosSection'
 import { PortatilPromoSection } from './PortatilPromoSection'
+import { KitDigitalLogosSection } from './KitDigitalLogosSection'
 import { FeaturesSection } from './FeaturesSection'
 import { KitDigitalSection } from './KitDigitalSection'
 import { KitSolutionsSection } from './KitSolutionsSection'
@@ -26,6 +27,7 @@ export function Layout() {
         <MainSection />
         <PatrociniosSection />
         <PortatilPromoSection />
+        <KitDigitalLogosSection />
         <FeaturesSection />
         <KitDigitalSection />
         <StepsSection />
