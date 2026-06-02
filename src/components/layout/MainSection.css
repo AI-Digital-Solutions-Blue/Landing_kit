@@ -134,7 +134,7 @@
   font-size: var(--hero-title-size);
   font-weight: 400;
   /* Evita recortar descendentes (g, y, p) con background-clip: text */
-  line-height: 0.92;
+  line-height: 1.08;
   letter-spacing: -0.035em;
   text-align: left;
   overflow: visible;
@@ -156,8 +156,8 @@
 
 .hero__title-line {
   display: block;
-  line-height: 1;
-  padding-bottom: 0.02em;
+  line-height: 1.12;
+  padding-bottom: 0.14em;
   overflow: visible;
 }
 
@@ -166,8 +166,8 @@
   max-width: 100%;
   font-size: var(--hero-subtitle-size);
   font-weight: 500;
-  line-height: 1.05;
-  padding-bottom: 0.04em;
+  line-height: 1.2;
+  padding-bottom: 0.18em;
   overflow: visible;
   letter-spacing: -0.032em;
   text-align: left;
@@ -493,7 +493,7 @@
   transform: scale(-0.75, 0.75);
   transform-origin: center left;
   /* Desplazamiento respecto a la posición final del flex (sustituye al translate): */
-  left: 1280px;
+  left: 1320px;
   top: -80px;
   right: auto;
   pointer-events: auto;

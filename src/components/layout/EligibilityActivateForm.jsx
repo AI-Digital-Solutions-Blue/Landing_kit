@@ -4,6 +4,7 @@ import {
   inferProvinceFromPostalCode,
   splitFullName,
 } from '../../utils/nifInference'
+import { getLabelByCodigo } from '../../utils/categoriaCatalog'
 
 const PROVINCIAS_ES = [
   'Álava', 'Albacete', 'Alicante', 'Almería', 'Asturias', 'Ávila', 'Badajoz',
@@ -43,6 +44,8 @@ function validate(values) {
 export function EligibilityActivateForm({
   details,
   baseTaxId,
+  solucionCodigo,
+  concedido,
   status,
   errorMessage,
   onSubmit,
@@ -119,6 +122,8 @@ export function EligibilityActivateForm({
     const employeesBySegmento = { 1: 1, 2: 3, 3: 10 }
     const employees = employeesBySegmento[segmento]
 
+    const solucionLabel = solucionCodigo ? getLabelByCodigo(solucionCodigo) : ''
+
     const payload = {
       business_name: String(details?.razon_social ?? '').trim() || values.name || '—',
       tax_id: String(baseTaxId ?? '').trim().toUpperCase(),
@@ -138,6 +143,9 @@ export function EligibilityActivateForm({
       ...(details?.id_convocatoria ? { record: String(details.id_convocatoria) } : {}),
       ...(employees ? { employees } : {}),
       ...(values.notes ? { notes: values.notes.trim() } : {}),
+      concedido: concedido ? 'Sí' : 'No',
+      ...(solucionCodigo ? { solucion_codigo: solucionCodigo } : {}),
+      ...(solucionLabel ? { solucion: solucionLabel } : {}),
     }
     onSubmit?.(payload)
   }

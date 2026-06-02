@@ -43,10 +43,27 @@ export function useXilonAuthorization() {
     // Fire-and-forget: registrar la activación en el sheet vía Make antes del
     // POST al backend. No bloqueamos la activación si Make falla.
     try {
+      const now = new Date()
+      const fechaParts = new Intl.DateTimeFormat('es-ES', {
+        timeZone: 'Europe/Madrid',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      }).formatToParts(now)
+      const horaParts = new Intl.DateTimeFormat('es-ES', {
+        timeZone: 'Europe/Madrid',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      }).formatToParts(now)
+      const get = (parts, type) => parts.find((p) => p.type === type)?.value ?? ''
+      const fecha = `${get(fechaParts, 'day')}/${get(fechaParts, 'month')}/${get(fechaParts, 'year')}`
+      const hora = `${get(horaParts, 'hour')}:${get(horaParts, 'minute')}`
+
       fetch(ACTIVATION_SHEET_WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ ...payload, fecha, hora }),
         keepalive: true,
       }).catch(() => {})
     } catch {

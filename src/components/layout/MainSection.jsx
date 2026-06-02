@@ -94,7 +94,9 @@ export function MainSection() {
               </div>
             ) : (
               <p className="hero__lead">
-                Tienes un bono Kit Digital concedido que caduca en menos de 6 meses. Úsalo con Siweb Canarias y <strong>llévate un portátil de regalo</strong> sin IVA, sin costes ocultos.
+                Tienes un bono Kit Digital concedido que caduca en menos de 6 meses.
+              
+                Úsalo   <br />con Siweb Canarias y <strong>llévate un portátil de regalo</strong> sin IVA, sin costes ocultos.
               </p>
             )}
 

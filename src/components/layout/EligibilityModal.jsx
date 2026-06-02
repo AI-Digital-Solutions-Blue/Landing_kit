@@ -62,6 +62,7 @@ export function EligibilityModal() {
   const [hasSubmittedOnce, setHasSubmittedOnce] = useState(false)
   const [view, setView] = useState('form') // 'form' | 'result' | 'activate' | 'activated'
   const [lastNif, setLastNif] = useState('')
+  const [lastCategoria, setLastCategoria] = useState('')
   const panelRef = useRef(null)
   const previouslyFocused = useRef(null)
 
@@ -73,6 +74,7 @@ export function EligibilityModal() {
       setHasSubmittedOnce(false)
       setView('form')
       setLastNif('')
+      setLastCategoria('')
     }
   }, [isEligibilityOpen, reset, resetActivation])
 
@@ -132,6 +134,7 @@ export function EligibilityModal() {
       return
     }
     setLastNif(values.nif)
+    setLastCategoria(values.categoria)
     check(values)
   }
 
@@ -478,6 +481,8 @@ export function EligibilityModal() {
             <EligibilityActivateForm
               details={result?.details ?? {}}
               baseTaxId={lastNif}
+              solucionCodigo={lastCategoria}
+              concedido={Boolean(result?.eligible)}
               status={activationStatus}
               errorMessage={activationError}
               onSubmit={handleActivationSubmit}
