@@ -405,11 +405,12 @@ export function EligibilityActivateForm({
       <div className="eligibility-modal__actions">
         <button
           type="button"
-          className="eligibility-modal__link"
+          className="eligibility-modal__back"
           onClick={onBack}
           disabled={isLoading}
         >
-          Volver
+          <span className="eligibility-modal__back-arrow" aria-hidden="true">←</span>
+          <span className="eligibility-modal__back-label">Volver</span>
         </button>
         <button
           type="submit"
