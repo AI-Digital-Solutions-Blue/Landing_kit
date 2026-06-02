@@ -516,7 +516,7 @@
 
 /* Variante .com: imagen un poco más abajo y desplazada a la derecha */
 .hero--com .hero__img {
-  top: clamp(-10px, 1vw, 60px);
+  top: clamp(-100px, -4vw, -20px);
   left: clamp(1180px, 68vw, 2320px);
 
   @media (max-width: 960px) {
