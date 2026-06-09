@@ -1,5 +1,5 @@
 /** Mismo ID que en `index.html` (Google Ads). */
-export const GOOGLE_ADS_ID = 'AW-18108890308'
+export const GOOGLE_ADS_ID = 'AW-16835728915'
 
 /**
  * Actualiza la página virtual para SPA (hash routing).
