@@ -2,7 +2,8 @@ import './MainSection.css'
 import { CtaOpenLeadModalLink } from './CtaOpenLeadModalLink'
 import { getSiteVariant } from '../../utils/siteVariant'
 
-const heroImageSrc = '/imagenes/hero-lenovo.png'
+//const heroImageSrc = '/imagenes/hero-lenovo.png'
+const heroImageSrc = '/imagenes/hero-cocomm.png'
 const listIconSrc = `/svg/${encodeURIComponent('iconLis.svg')}`
 
 const heroBulletsEs = [
@@ -62,7 +63,6 @@ export function MainSection() {
                   <h2 id="hero-subheading" className="hero__subtitle hero__subtitle--com">
                     Y Siweb te <span className="hero__accent">regala</span> este portátil.
                   </h2>
-                  <p className="hero__disclaimer">*o modelo similar de la marca Lenovo</p>
                 </>
               ) : (
                 <>
@@ -77,7 +77,6 @@ export function MainSection() {
                   <h2 id="hero-subheading" className="hero__subtitle">
                     Y Siweb te regala <span className="hero__accent">este portátil.</span>
                   </h2>
-                  <p className="hero__disclaimer">*o modelo similar de la marca Lenovo</p>
                 </>
               )}
             </div>
