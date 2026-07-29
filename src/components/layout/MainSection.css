@@ -517,7 +517,7 @@
 /* Variante .com: misma posición del portátil que en la variante .es */
 .hero--com .hero__img {
   top: -80px;
-  left: 1250px;
+  left: 820px;
 
   @media (max-width: 960px) {
     top: 30px;
