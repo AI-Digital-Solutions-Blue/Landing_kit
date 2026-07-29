@@ -514,10 +514,10 @@
   }
 }
 
-/* Variante .com: imagen un poco más abajo y desplazada a la derecha */
+/* Variante .com: misma posición del portátil que en la variante .es */
 .hero--com .hero__img {
-  top: clamp(-100px, -4vw, -20px);
-  left: clamp(1180px, 68vw, 2320px);
+  top: -80px;
+  left: 1250px;
 
   @media (max-width: 960px) {
     top: 30px;
